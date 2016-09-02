@@ -1,0 +1,190 @@
+.post.tag-csscomics{
+  max-width: 9999px;
+  padding: 0;
+  margin: 4% 9%;
+  padding-bottom: 2.5em;
+}
+
+ul{
+  /* clear UL trick */
+  overflow:hidden;
+}
+
+.csscomic {
+  /* general comic settings */
+  font-family: "Comic sans MS";
+  width: 100%;
+/*  max-width: 750px;*/
+  margin: 0 auto;
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+.csscomic ul {
+  display: block;
+  padding: 0;
+  margin: 0;
+  min-height: 240px;
+}
+.csscomic ul li {
+  /* each vignette */
+  width: 30%;
+  min-width: 230px;
+  float: left;
+  border: solid 1px black;
+  margin: 0.4em;
+  list-style: none;
+  position: relative;
+  height: 240px;
+}
+.csscomic ul li.bkg-office {
+  background-color: #ccf;
+}
+.csscomic ul li.span2 {
+  width: 60%;
+}
+.csscomic ul li a {
+  font-weight: bold;
+  color: #006;
+  text-decoration: none;
+  font-style: oblique;
+}
+.csscomic ul li .actor {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.csscomic ul li .actor.actor1 {
+  background-image: url("http://54chi.com/assets/img/svg/p.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+.csscomic ul li .actor.actor2 {
+  background-image: url("http://54chi.com/assets/img/svg/architect.svg");
+  background-repeat: no-repeat;
+  background-size: 55px 55px;
+}
+.csscomic ul li .actor.actor3 {
+  background-image: url("http://54chi.com/assets/img/svg/projectManager.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+
+.csscomic ul li .actor-peter {
+  background-image: url("http://54chi.com/assets/img/svg/p.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+.csscomic ul li .actor-architect {
+  background-image: url("http://54chi.com/assets/img/svg/architect.svg");
+  background-repeat: no-repeat;
+  background-size: 55px 55px;
+}
+.csscomic ul li .actor-manager {
+  background-image: url("http://54chi.com/assets/img/svg/projectManager.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+.csscomic ul li .actor-robot {
+  background-image: url("http://54chi.com/assets/img/svg/accountant.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+.csscomic ul li .actor-devLead {
+  background-image: url("http://54chi.com/assets/img/svg/devLead.svg");
+  background-repeat: no-repeat;
+  background-size: 38px 50px;
+}
+.csscomic ul li .actor-CFO {
+  background-image: url("http://54chi.com/assets/img/svg/CFO.svg");
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+}
+.csscomic ul li .actor-ET {
+  background-image: url("http://54chi.com/assets/img/svg/extraterrestrial1.svg");
+  background-repeat: no-repeat;
+  background-size: 64px 64px;
+}
+
+/*
+.csscomic ul li .left.shift1{
+  margin-left:60px;
+  z-index:100;
+}
+.csscomic ul li .right.shift1{
+  margin-left:-60px;
+    z-index:100;
+}
+*/
+
+.csscomic ul li .actor.left,
+.csscomic ul li .actor.flip.right {
+  float: left;
+  background-position: bottom left;
+}
+.csscomic ul li .actor.right,
+.csscomic ul li .actor.flip.left {
+  float: right;
+  background-position: bottom right;
+}
+.csscomic ul li .actor.use-50 > * {
+  width: 42%;
+}
+.csscomic ul li .actor > *{
+  margin: 0.5em;
+  border: solid 1px #7F7F7F;
+  background-color: #fff;
+  border-radius: 1.1em;
+  padding: 0.5em;
+  position: relative;
+  display: inline-block;
+}
+.csscomic ul li .actor > *:after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 20%;
+  border-style: solid;
+  border-width: 15px 4px 0;
+  border-color: #fff transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+}
+.csscomic ul li .actor > *:before {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: calc(19%);
+  border-style: solid;
+  border-width: 16px 6px 0;
+  border-color: #7f7f7f transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+}
+.csscomic ul li .actor.flip {
+  -webkit-transform: scaleX(-1);
+  -moz-tansform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.csscomic ul li .actor.flip.left {
+  float: left;
+}
+.csscomic ul li .actor.flip.right {
+  float: right;
+}
+.csscomic ul li .actor.flip > * {
+  -webkit-transform: scaleX(-1);
+  -moz-tansform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.csscomic ul li .actor.flip > *:after {
+  left: 80%;
+}
+.csscomic ul li .actor.flip > *:before {
+  left: calc(79%);
+}

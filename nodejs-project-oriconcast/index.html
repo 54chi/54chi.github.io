@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>NodeJS project: oriconCast</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/csscomics.css" />
+  
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="http://54chi.github.io/nodejs-project-oriconcast/" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="54chi" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="NodeJS project: oriconCast" />
+    <meta property="og:description" content="The 3rd project of the year got a slight change of scope. The Problem APIs are beautiful solutions to get things inter-connected. They can provide content in a secured and custom way. Assuming there is an API available. When they..." />
+    <meta property="og:url" content="http://54chi.github.io/nodejs-project-oriconcast/" />
+    <meta property="og:image" content="http://54chi.github.io/content/images/2016/02/11702568145_60ce3aceb9_k.jpg" />
+    <meta property="article:published_time" content="2016-02-19T20:20:47.221Z" />
+    <meta property="article:modified_time" content="2016-02-19T20:45:14.720Z" />
+    <meta property="article:tag" content="projects" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NodeJS project: oriconCast" />
+    <meta name="twitter:description" content="The 3rd project of the year got a slight change of scope. The Problem APIs are beautiful solutions to get things inter-connected. They can provide content in a secured and custom way. Assuming there is an API available. When they..." />
+    <meta name="twitter:url" content="http://54chi.github.io/nodejs-project-oriconcast/" />
+    <meta name="twitter:image:src" content="http://54chi.github.io/content/images/2016/02/11702568145_60ce3aceb9_k.jpg" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "54chi",
+    "author": {
+        "@type": "Person",
+        "name": "54chi",
+        "url": "http://54chi.github.io/author/54chi",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "NodeJS project: oriconCast",
+    "url": "http://54chi.github.io/nodejs-project-oriconcast/",
+    "datePublished": "2016-02-19T20:20:47.221Z",
+    "dateModified": "2016-02-19T20:45:14.720Z",
+    "image": "http://54chi.github.io/content/images/2016/02/11702568145_60ce3aceb9_k.jpg",
+    "keywords": "projects",
+    "description": "The 3rd project of the year got a slight change of scope. The Problem APIs are beautiful solutions to get things inter-connected. They can provide content in a secured and custom way. Assuming there is an API available. When they..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="54chi" href="http://54chi.github.io/rss/" />
+</head>
+<body class="post-template tag-projects nav-closed">
+
+    <nav class="nav">
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog" role="presentation"><a href="http://54chi.com/tag/blog">Blog</a></li>
+            <li class="nav-comics" role="presentation"><a href="http://54chi.com/tag/csscomics">Comics</a></li>
+            <li class="nav-projects" role="presentation"><a href="http://54chi.com/tag/projects">Projects</a></li>
+            <li class="nav-trips" role="presentation"><a href="http://54chi.com/tag/trips">Trips</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head " style="background-image: url(../content/images/2016/02/11702568145_60ce3aceb9_k.jpg)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="http://54chi.github.io"><img src="../content/images/2015/12/127414.png" alt="54chi" /></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-projects">
+
+        <header class="post-header">
+            <h1 class="post-title">NodeJS project: oriconCast</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-02-19">19 February 2016</time>  on <a href="../tag/projects/index.html">projects</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>The 3rd project of the year got a slight change of scope.</p>
+
+<h5 id="theproblem">The Problem</h5>
+
+<p>APIs are beautiful solutions to get things inter-connected. They can provide content in a secured and custom way.</p>
+
+<p>Assuming there is an API available.</p>
+
+<p>When they are not, your options are limited (e.g. FTP a file, direct Database access, manual input, etc.)</p>
+
+<p>But since everything is on the web these days, there are other alternatives.</p>
+
+<h5 id="asolution">A Solution</h5>
+
+<p>Screen scrapping and crawling, which basically means open a website and navigate its links in an automated way. While doing so, retrieve the data you need (e.g. in a json file or database) that can then be used for your own needs (e.g. your own API).</p>
+
+<p>Originally, the plan was to create an automated podcast generation code. The flow was going to be like this:</p>
+
+<ol>
+<li>Open Oricon chart's top Indie tracks  </li>
+<li>Create a json file with the results  </li>
+<li>Open youtube and download a video for each song  </li>
+<li>Extract the audio from the videos  </li>
+<li>Combine them all into one big mp3 file ready to be uploaded as a podcast</li>
+</ol>
+
+<p>Step #3 was a pain. Most videos were non-existent or "covers" made by fans. I even tried other sources besides youtube with similar results. Plus I was getting concerned of copyrights and stuff.</p>
+
+<p>So, I was checking youtube videos aimlessly and found "Top 5" type of videos and thought to myself I can probably automate that stuff.</p>
+
+<p>The new flow is like this:</p>
+
+<ol>
+<li>Open kickstarter's top technology campaign pages  </li>
+<li>Create a json file with the results  </li>
+<li>Download the campaign videos  </li>
+<li>Create "covers" for each video (aka: campaign's title)  </li>
+<li>Resize the videos accordingly (in this case, they are all 640x360 pixels)  </li>
+<li>Combine them all into one big mp4 file ready to be uploaded to youtube</li>
+</ol>
+
+<p>The process is fully automated, and it takes a few minutes to compelte (mostly because of the downloads and rescaling).</p>
+
+<p>This ended up being more complex than the original project, which I like.</p>
+
+<p>Sample result:  </p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/s13qiRiWqIg" frameborder="0" allowfullscreen></iframe>
+
+<p>The code can be found <a href="https://github.com/54chi/oriconCast">here</a></p>
+
+<p>Tools used:</p>
+
+<ul>
+<li><a href="https://github.com/lapwinglabs/x-ray">x-ray</a></li>
+<li><a href="https://github.com/kevva/download">download</a></li>
+<li><a href="https://github.com/fluent-ffmpeg/node-fluent-ffmpeg">fluent-ffmpeg</a></li>
+</ul>
+
+<p>Future changes (upcoming months)</p>
+
+<ul>
+<li>Command line parameters</li>
+<li>Uploading to youtube</li>
+</ul>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/54chi/index.html">54chi</a></h4>
+
+                    <p>Read <a href="../author/54chi/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=NodeJS%20project%3A%20oriconCast&amp;url=http://54chi.github.io/nodejs-project-oriconcast/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://54chi.github.io/nodejs-project-oriconcast/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://54chi.github.io/nodejs-project-oriconcast/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../uml-with-javascript/index.html">
+        <section class="post">
+            <h2>UML with Javascript</h2>
+            <p>As my projects are getting more and more complex, I'm going to need a better way to describe them.&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../content/images/2016/02/sagradafamilia.jpg)" href="../month-1-review/index.html">
+        <section class="post">
+            <h2>Progress review</h2>
+            <p>CMS project: Setup publishing platform/blog (http://54chi.github.io  http://54chi.com ). I like it so far. Ghost&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+    </div>
+
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72923351-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="../assets/js/index.js"></script>
+
+</body>
+</html>
