@@ -54,53 +54,53 @@ ul{
   position: absolute;
 }
 .csscomic ul li .actor.actor1 {
-  background-image: url("http://54chi.com/assets/img/svg/p.svg");
+  background-image: url("../img/svg/p.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
 .csscomic ul li .actor.actor2 {
-  background-image: url("http://54chi.com/assets/img/svg/architect.svg");
+  background-image: url("../img/svg/architect.svg");
   background-repeat: no-repeat;
   background-size: 55px 55px;
 }
 .csscomic ul li .actor.actor3 {
-  background-image: url("http://54chi.com/assets/img/svg/projectManager.svg");
+  background-image: url("../img/svg/projectManager.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
 
 .csscomic ul li .actor-peter {
-  background-image: url("http://54chi.com/assets/img/svg/p.svg");
+  background-image: url("../img/svg/p.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
 .csscomic ul li .actor-architect {
-  background-image: url("http://54chi.com/assets/img/svg/architect.svg");
+  background-image: url("../img/svg/architect.svg");
   background-repeat: no-repeat;
   background-size: 55px 55px;
 }
 .csscomic ul li .actor-manager {
-  background-image: url("http://54chi.com/assets/img/svg/projectManager.svg");
+  background-image: url("../img/svg/projectManager.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
 .csscomic ul li .actor-robot {
-  background-image: url("http://54chi.com/assets/img/svg/accountant.svg");
+  background-image: url("../img/svg/accountant.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
 .csscomic ul li .actor-devLead {
-  background-image: url("http://54chi.com/assets/img/svg/devLead.svg");
+  background-image: url("../img/svg/devLead.svg");
   background-repeat: no-repeat;
   background-size: 38px 50px;
 }
 .csscomic ul li .actor-CFO {
-  background-image: url("http://54chi.com/assets/img/svg/CFO.svg");
+  background-image: url("../img/svg/CFO.svg");
   background-repeat: no-repeat;
   background-size: 100px 100px;
 }
 .csscomic ul li .actor-ET {
-  background-image: url("http://54chi.com/assets/img/svg/extraterrestrial1.svg");
+  background-image: url("../img/svg/extraterrestrial1.svg");
   background-repeat: no-repeat;
   background-size: 64px 64px;
 }
