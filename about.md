@@ -6,6 +6,15 @@ permalink: /about/
 
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
+Does github reads this file and parse it automatically or do I depend on an external generator?
+
+It takes some time, but I'd rather update my stuff directly in md format :)
+
+## Lalalala
+
+- With preview
+- and code changes tracking :)
+
 You can find the source code for the Jekyll new theme at:
 {% include icon-github.html username="jekyll" %} /
 [minima](https://github.com/jekyll/minima)
