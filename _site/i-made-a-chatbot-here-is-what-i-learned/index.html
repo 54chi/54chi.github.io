@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>I made a chatbot. Here is a braindump of what I know so far</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/csscomics.css" />
+  
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="54chi" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="I made a chatbot. Here is a braindump of what I know so far" />
+    <meta property="og:description" content="A few days ago, the Ford SmartJourney hackathon came to an end. The topic was how to solve the Mexico DF transportation problems: too many cars on the road, slow mass transportation, informal bus routes, high pollution, etc. I made..." />
+    <meta property="og:url" content="http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/" />
+    <meta property="og:image" content="http://54chi.github.io/content/images/2016/08/chatbot.jpg" />
+    <meta property="article:published_time" content="2016-08-04T09:01:08.464Z" />
+    <meta property="article:modified_time" content="2016-08-04T22:53:19.252Z" />
+    <meta property="article:tag" content="blog" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="I made a chatbot. Here is a braindump of what I know so far" />
+    <meta name="twitter:description" content="A few days ago, the Ford SmartJourney hackathon came to an end. The topic was how to solve the Mexico DF transportation problems: too many cars on the road, slow mass transportation, informal bus routes, high pollution, etc. I made..." />
+    <meta name="twitter:url" content="http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/" />
+    <meta name="twitter:image:src" content="http://54chi.github.io/content/images/2016/08/chatbot.jpg" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "54chi",
+    "author": {
+        "@type": "Person",
+        "name": "54chi",
+        "url": "http://54chi.github.io/author/54chi",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "I made a chatbot. Here is a braindump of what I know so far",
+    "url": "http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/",
+    "datePublished": "2016-08-04T09:01:08.464Z",
+    "dateModified": "2016-08-04T22:53:19.252Z",
+    "image": "http://54chi.github.io/content/images/2016/08/chatbot.jpg",
+    "keywords": "blog",
+    "description": "A few days ago, the Ford SmartJourney hackathon came to an end. The topic was how to solve the Mexico DF transportation problems: too many cars on the road, slow mass transportation, informal bus routes, high pollution, etc. I made..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="54chi" href="http://54chi.github.io/rss/" />
+</head>
+<body class="post-template tag-blog nav-closed">
+
+    <nav class="nav">
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog" role="presentation"><a href="../tag/blog.2">Blog</a></li>
+            <li class="nav-comics" role="presentation"><a href="../tag/csscomics.2">Comics</a></li>
+            <li class="nav-projects" role="presentation"><a href="../tag/projects.2">Projects</a></li>
+            <li class="nav-trips" role="presentation"><a href="../tag/trips.2">Trips</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head " style="background-image: url(../content/images/2016/08/chatbot.jpg)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="http://54chi.github.io"><img src="../content/images/2015/12/127414.png" alt="54chi" /></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-blog">
+
+        <header class="post-header">
+            <h1 class="post-title">I made a chatbot. Here is a braindump of what I know so far</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-08-04">04 August 2016</time>  on <a href="../tag/blog/index.html">blog</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>A few days ago, the Ford SmartJourney hackathon came to an end. The topic was how to solve the Mexico DF transportation problems: too many cars on the road, slow mass transportation, informal bus routes, high pollution, etc.</p>
+
+<p>I made a chatbot. </p>
+
+<p>I'll talk about the whole solution eventually, but in the meantime, here is what I learnt about chatbots (as of 2016):</p>
+
+<ol>
+<li>Chatbots are not new stuff. They have been in one for or another since late 60s (Eliza was made in 1966 -- she is 50 years old!!)  </li>
+<li>Facebook messenger and Whatsapp (owned by Facebook) are the top public messaging systems in the US, but Facebook only announced its bot platform a couple months ago. Slack (used by many companies), Wechat (popular in China) and LINE (popular in Japan) have been supporting bots for a while now.  </li>
+<li>Microsoft also announced its bot platform, with strong emphasis in NLP and AI. To prove its technology, they've released Xiaoice (for Weibo/Wechat) in China, Rinna (for LINE/Twitter) in Japan, and the infamous Tay (for Twitter) in the US. The tehcnology behind these bots is impresive, and even though it considers millions of conversation possibilities, is still not perfect.  </li>
+<li>The barrier to create a chatbot is pretty low, and will  become even easier as their popularity increases  </li>
+<li>However, the majority of the bots are pretty ignorant, and will still require coding for more complex stuff (e.g. calling webhooks to get the weather report)  </li>
+<li>The most complex thing (according to me) is still around understanding the user's intent (what he or she wants to do): here are a couple ways to address this issue: <br />
+<ul><li>NLP (natural language programming) combined with AI: the idea behind this is that the bot can keep up with human conversation naturally and learn by interacting with its user. E.g. wit.ai, api.ai, etc. It's the one with the most potential to grow. </li>
+<li>"Choose-your-adventure" type (I'm sure there is a better name for this), where a list of options is presented for the user to choose. It is less flexible, but may have a greater success rate since the bot forces the user to select an action in a specific way. Most bot software supports this. </li>
+<li>Keep in mind that none of the above options is perfect. NLP is too complex and inaccurate to become usable (just look into Siri, Cortana and Google Now...). And having a set of few   options ("choose your adventure" type) is limiting and will frustrate the user when they try an option that was not pre-programmed. The goo news is that there is a third, better way: Hybrid mode, where human assistants also participate in the answers. It's not the cheapest, but it certainly saves cost. I expect many of the first wave of popular bots will go this route instead of the first two.</li></ul></li>
+<li>There will be a rise of job opportunities for two new roles: <br />
+<ul><li>Conversation Experience designers (aka: designers for voice) that will really need to understand how MOST users will interact with the app</li>
+<li>Language scientists that can take the few flows discovered by the conversation designers and expand it to support all the possible variations, either by intent matching, pattern recognition, NLP, etc.</li></ul></li>
+<li>At least for Facebook messenger (and a few others), there doesn't seem to be an approval process. The messenger will be tied with a Facebook page, but that's it. What this means is that currently is possible to upload broken code or even malign code. Expect a lot more spam bots and clones in the future with similar names to the most popular ones.  </li>
+<li>Since the majority of the bots are cloud based, the conversation history could be stored in the messenger providers and anything in between (e.g. a database, a text file, an email...). That'll be the FBI's dream come true, but a nightmare for anyone concerned for their privacy. Make sure to check the ToS, or at least convince your infosec guy that the bot means no harm :p  </li>
+<li>There are plenty of success stories around the messenger ecosystems in Asia (just google WeChat or LINE), and nobody denies the potential; but there is no killing messenger app in the US yet  </li>
+<li>Messenger app stores out there are very crappy, and have not reached a critical mass in the states (yet).  </li>
+<li>Creating a bot for one type of messenger and then porting it to support another type of messenger is trivial (easier than porting an app from android to ios, for example). There are a few products out there to make it even easier (e.g. smooch.io and meya.ai), and is probably a good idea to invest researching them, as the bot market will keep maturing and become more and more popular.</li>
+</ol>
+
+<p>This was a continuation of my <a href="../designing-for-voice-a-point-of-view/index.html">"design for voice"</a> post, which help me design my chatbot interface.</p>
+
+<p>And also my Alexa skill ;)</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/54chi/index.html">54chi</a></h4>
+
+                    <p>Read <a href="../author/54chi/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=I%20made%20a%20chatbot.%20Here%20is%20a%20braindump%20of%20what%20I%20know%20so%20far&amp;url=http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://54chi.github.io/i-made-a-chatbot-here-is-what-i-learned/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story " style="background-image: url(../content/images/2016/08/smile-1013017_1280.jpg)" href="../hr-project-dayscore/index.html">
+        <section class="post">
+            <h2>HR Project: Dayscore</h2>
+            <p>The Problem As a manager or leader for Technology projects, we have a plethora of tools and techniques that&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../content/images/2016/07/midyear.jpg)" href="../roadmap-2016-middle-point/index.html">
+        <section class="post">
+            <h2>Roadmap 2016 - Middle point</h2>
+            <p>When I started 2016, I created a wishlist of "things" that I would like to do. Call it New&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+    </div>
+
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72923351-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="../assets/js/index.js"></script>
+
+</body>
+</html>

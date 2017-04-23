@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>How to do BDD in your project</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/csscomics.css" />
+  
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="http://54chi.github.io/the-exorcist/" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="54chi" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How to do BDD in your project" />
+    <meta property="og:description" content="Hey P!                                           Wazzup Senior Architect!                                                     Not bad. After 6 months of deep thinking, I&#x27;ve decided that we&#x27;ll implement BDD with kookoombah in the API project                                                      Great. But how do you plan to do BDD and cucumber in it? We don&#x27;t..." />
+    <meta property="og:url" content="http://54chi.github.io/the-exorcist/" />
+    <meta property="article:published_time" content="2016-02-01T04:57:31.287Z" />
+    <meta property="article:modified_time" content="2016-02-03T04:10:56.579Z" />
+    <meta property="article:tag" content="CSScomics" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="How to do BDD in your project" />
+    <meta name="twitter:description" content="Hey P!                                           Wazzup Senior Architect!                                                     Not bad. After 6 months of deep thinking, I&#x27;ve decided that we&#x27;ll implement BDD with kookoombah in the API project                                                      Great. But how do you plan to do BDD and cucumber in it? We don&#x27;t..." />
+    <meta name="twitter:url" content="http://54chi.github.io/the-exorcist/" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "54chi",
+    "author": {
+        "@type": "Person",
+        "name": "54chi",
+        "url": "http://54chi.github.io/author/54chi",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "How to do BDD in your project",
+    "url": "http://54chi.github.io/the-exorcist/",
+    "datePublished": "2016-02-01T04:57:31.287Z",
+    "dateModified": "2016-02-03T04:10:56.579Z",
+    "keywords": "CSScomics",
+    "description": "Hey P!                                           Wazzup Senior Architect!                                                     Not bad. After 6 months of deep thinking, I&#x27;ve decided that we&#x27;ll implement BDD with kookoombah in the API project                                                      Great. But how do you plan to do BDD and cucumber in it? We don&#x27;t..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="54chi" href="http://54chi.github.io/rss/" />
+</head>
+<body class="post-template tag-csscomics nav-closed">
+
+    <nav class="nav">
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog" role="presentation"><a href="../tag/blog.2">Blog</a></li>
+            <li class="nav-comics" role="presentation"><a href="../tag/csscomics.2">Comics</a></li>
+            <li class="nav-projects" role="presentation"><a href="../tag/projects.2">Projects</a></li>
+            <li class="nav-trips" role="presentation"><a href="../tag/trips.2">Trips</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="blog-logo" href="http://54chi.github.io"><img src="../content/images/2015/12/127414.png" alt="54chi" /></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-csscomics">
+
+        <header class="post-header">
+            <h1 class="post-title">How to do BDD in your project</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-01-31">31 January 2016</time>  on <a href="../tag/csscomics/index.html">CSScomics</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <div class="csscomic">  
+  <ul>
+    <li>
+      <div class="actor actor2 left">
+        <div class="bubble">
+          Hey P!
+        </div>
+      </div>
+      <div class="actor actor1 flip right use-50">
+        <div class="bubble">
+          Wazzup Senior Architect!
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="actor actor2 left">
+        <div class="bubble">
+          Not bad. After 6 months of deep thinking, I've decided that we'll implement BDD with kookoombah in the API project
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="actor actor1 flip right">
+        <div class="bubble">
+           Great. But how do you plan to do BDD and <i>cucumber</i> in it? We don't have a UI
+        </div>
+      </div>
+    </li>
+<li>  
+      <div class="actor actor2 left">
+        <div class="bubble">
+          It doesn't matter. I just tell the developers to do it and they'll have to figure it out
+        </div>
+      </div>
+</li>  
+<li class="span2">  
+     <div class="actor actor2 left use-50">
+       <div class="bubble">
+           But if needed I'm prepared to train the whole team and make them experts. I know kookoombah very well...
+       </div>
+     </div>
+      <div class="actor actor1 flip right use-50">
+        <div class="bubble">
+          That's cool, 'cause most developers don't know anything about it at all
+        </div>
+      </div>
+</li>  
+<li>  
+     <div class="actor actor2 left use-50">
+       <div class="bubble">
+          ...       
+       </div>
+     </div>
+      <div class="actor actor1 flip right use-50">
+      </div>
+</li>  
+<li class="span2">  
+     <div class="actor actor2 left use-50">
+       <div class="bubble">
+           Errr...I totally would, but I'm busy on <b>THAT</b> day. Can you teach kookoombah?
+       </div>
+     </div>
+     <div class="actor actor1 flip right use-50">
+       <div class="bubble">
+         Saw that coming from miles away
+       </div>
+     </div>
+    </li>
+  </ul>
+</div>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/54chi/index.html">54chi</a></h4>
+
+                    <p>Read <a href="../author/54chi/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=How%20to%20do%20BDD%20in%20your%20project&amp;url=http://54chi.github.io/the-exorcist/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://54chi.github.io/the-exorcist/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://54chi.github.io/the-exorcist/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story " style="background-image: url(../content/images/2016/02/government.jpg)" href="../country-as-a-service/index.html">
+        <section class="post">
+            <h2>Country as a Service</h2>
+            <p>In Today's current state of technology, it is obvious that the demand for better User Experience brings a lot&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../content/images/2016/01/cafe.jpg)" href="../lima-caffeinated/index.html">
+        <section class="post">
+            <h2>Lima, caffeinated</h2>
+            <p>Here are the places I've checked so far (mostly coffee shops): Starbucks: in my defense, I'd say that I&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+    </div>
+
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72923351-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="../assets/js/index.js"></script>
+
+</body>
+</html>
