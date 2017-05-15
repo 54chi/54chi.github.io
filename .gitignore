@@ -13,6 +13,7 @@
 /vendor
 Gemfile.lock
 _site/
+_drafts/
 bin/
 bbin/
 coverage
@@ -21,3 +22,4 @@ pkg/
 site/_site/
 test/dest
 tmp/*
+node_modules
