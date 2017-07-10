@@ -5,9 +5,52 @@
     <description>Thoughts, stories and ideas...but mostly ideas. Mostly around the tech hype of the moment. Now with more AI.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 May 2017 21:45:50 -0500</pubDate>
-    <lastBuildDate>Sun, 14 May 2017 21:45:50 -0500</lastBuildDate>
+    <pubDate>Sun, 09 Jul 2017 18:13:35 -0500</pubDate>
+    <lastBuildDate>Sun, 09 Jul 2017 18:13:35 -0500</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
+    
+      <item>
+        <title>El Entorno</title>
+        <description>&lt;p&gt;Nunca entendi la fascinacion de la gente que compra laptops gigantes y caras (y feas para mi gusto), con el solo fin de jugar en la maxima calidad de graficos posible.&lt;/p&gt; &lt;p&gt;Aun no lo entiendo.&lt;/p&gt; &lt;p&gt;Pero lo que si descubri, es que esas laptops gigantes y caras (y feas) es lo mejor del momento para hacer desarrollos relacionados con Inteligencia Artificial (AI). Desde febrero ando haciendo mis pininos con AI, tratando de descifrar el misterio de los “hiper-parrametros” y el deep-learning.&lt;/p&gt; &lt;p&gt;Ya tenia pensado armar un desktop PC desde hace unos meses, pero como no habia mucha diferencia de precio...</description>
+        <pubDate>Mon, 15 May 2017 02:49:39 -0500</pubDate>
+        <link>http://localhost:4000/el-entorno/</link>
+        <guid isPermaLink="true">http://localhost:4000/el-entorno/</guid>
+        
+        <category>AI</category>
+        
+        <category>cudas</category>
+        
+        <category>Ubuntu Mate</category>
+        
+        <category>Anaconda</category>
+        
+        <category>Hardware</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>the environment</title>
+        <description>&lt;p&gt;I haven’t posted in a while (since the end of my sabbatical and re-incorporation to the “normal” working force)&lt;/p&gt;
+
+&lt;p&gt;I’ve decided to start blogging in Spansi&lt;/p&gt;
+</description>
+        <pubDate>Mon, 15 May 2017 02:46:28 -0500</pubDate>
+        <link>http://localhost:4000/the-environment/</link>
+        <guid isPermaLink="true">http://localhost:4000/the-environment/</guid>
+        
+        <category>AI</category>
+        
+        <category>Cudas</category>
+        
+        <category>Ubuntu Mate</category>
+        
+        <category>Anaconda</category>
+        
+        <category>Hardware</category>
+        
+        
+      </item>
     
       <item>
         <title>How to use</title>
