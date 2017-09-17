@@ -7,10 +7,11 @@ layout: compress
     {% include head.html %}
     <body>
         {% include svg-icons.html %}
-        {% include header-post.html %}
+        {% include header-min.html %}
         <section class="post" itemscope itemtype="http://schema.org/WebPage">
 
             <article role="article" id="scroll" class="post-content" role="main" itemprop="mainContentOfPage">
+              <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
                 {{ content }}
             </article>
 

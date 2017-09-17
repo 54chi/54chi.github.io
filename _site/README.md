@@ -1,6 +1,11 @@
 # Blog
 Originally powered by [Ghost](http://ghost.org) and [Buster](https://github.com/axitkhurana/buster/), but after going through a few other static page generators, ultimately set up with [Jekyll](https://scotch.io/tutorials/getting-started-with-jekyll-plus-a-free-bootstrap-3-starter-theme), so I can sort of edit content directly within Github if needed.
 
+# To use:
+- sudo npm install
+- sudo npm install -g gulp gulp-cli
+- sudo gulp
+
 ## Jekyll Quicksheet:
 
 `jekyll -v` to check the version

@@ -1,20 +1,18 @@
----
-layout: compress
----
-
 <!DOCTYPE html>
 <html lang="pt-br">
     {% include head.html %}
     <body>
         {% include svg-icons.html %}
-        {% include header-min.html %}
+        {% include header-post.html %}
         <section class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
             <article role="article" id="scroll" class="post-content" itemprop="articleBody">
-              <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-              
                 {{ content }}
             </article>
 
+            {% include share.html %}
+            {% include author.html %}
+            {% include comments.html %}
             {% include footer.html %}
         </section>
     </body>
