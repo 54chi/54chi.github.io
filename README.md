@@ -13,4 +13,4 @@ Originally powered by [Ghost](http://ghost.org) and [Buster](https://github.com/
 
 Since creating posts (sp. the filename) is a bit annoying, I used [this post](http://www.marcusoft.net/2014/12/my-post-scaffolder-for-jekyll.html) to also include a script to scaffold a post.
 
-`bash scaffold_post "A post title"` to create a post
+`bash scaffold_post.sh "A post title"` to create a post

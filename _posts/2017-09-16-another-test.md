@@ -1,20 +1,16 @@
 ---
 layout: post
-title: "How to use"
-author: "AI 54chi"
-date: 2017-05-14 20:28:30
-image: '/assets/img/'
-description: 'First steps to use this template'
+title: "And...we are still alive"
+author: "54chi"
+date: 2017-09-15 19:53:49
 tags:
-- jekyll
-- template
-categories:
-- I love Jekyll
-twitter_text: 'How to install and use this template'
+- test
 ---
 
 You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
 To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
+
+http://localhost:3000/specs/index.html
 
 Jekyll also offers powerful support for code snippets:
 

@@ -3,26 +3,24 @@
   <channel>
     <title>54chi</title>
     <description>Thoughts, stories and ideas...but mostly ideas. Mostly around the tech hype of the moment. Now with more AI.</description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 16 Sep 2017 19:13:05 -0500</pubDate>
-    <lastBuildDate>Sat, 16 Sep 2017 19:13:05 -0500</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 16 Sep 2017 20:43:53 -0500</pubDate>
+    <lastBuildDate>Sat, 16 Sep 2017 20:43:53 -0500</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
     
       <item>
-        <title>El Entorno</title>
-        <description>&lt;p&gt;Nunca entendi la fascinacion de la gente que compra laptops gigantes y caras (y feas para mi gusto), con el solo fin de jugar en la maxima calidad de graficos posible.&lt;/p&gt; &lt;p&gt;Aun no lo entiendo.&lt;/p&gt; &lt;p&gt;Pero lo que si descubri, es que esas laptops gigantes y caras (y feas) es lo mejor del momento para hacer desarrollos relacionados con Inteligencia Artificial (AI). Desde febrero ando haciendo mis pininos con AI, tratando de descifrar el misterio de los “hiper-parrametros” y el deep-learning.&lt;/p&gt; &lt;p&gt;Ya tenia pensado armar un desktop PC desde hace unos meses, pero como no habia mucha diferencia de precio...</description>
-        <pubDate>Mon, 15 May 2017 02:49:39 -0500</pubDate>
-        <link>/el-entorno/</link>
-        <guid isPermaLink="true">/el-entorno/</guid>
+        <title>Specs</title>
+        <description>&lt;p&gt;I’ve been denying this blog for a Year already. Things got busier and I am no longer enjoying a “long vacation”. Because of my current job, a few things have changed. Mostly:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;No more Erlang/Elixir (my current job is Java-like, so I can only focus on NodeJS as a side project for now):(&lt;/li&gt; &lt;li&gt;More DevOps and automation though :), thought it will probably be focused on SalesForce :(&lt;/li&gt; &lt;li&gt;Vue.js :)&lt;/li&gt; &lt;li&gt;REST services :( (though I will try to blog about GraphQL too. We’ll see)&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;As for the environment itself, this is what I’m currently sporting:&lt;/p&gt; &lt;ol&gt; &lt;li&gt;Ubuntu Mate&lt;/li&gt;...</description>
+        <pubDate>Sat, 16 Sep 2017 15:10:33 -0500</pubDate>
+        <link>http://localhost:4000/specs/</link>
+        <guid isPermaLink="true">http://localhost:4000/specs/</guid>
         
-        <category>AI</category>
+        <category>projectplan</category>
         
-        <category>cudas</category>
+        <category>projects</category>
         
-        <category>Ubuntu Mate</category>
-        
-        <category>Anaconda</category>
+        <category>specs</category>
         
         <category>Hardware</category>
         
@@ -30,87 +28,26 @@
       </item>
     
       <item>
-        <title>the environment</title>
-        <description>&lt;p&gt;I haven’t posted in a while (since the end of my sabbatical and re-incorporation to the “normal” working force)&lt;/p&gt;
-
-&lt;p&gt;I’ve decided to start blogging in Spansi&lt;/p&gt;
-</description>
-        <pubDate>Mon, 15 May 2017 02:46:28 -0500</pubDate>
-        <link>/the-environment/</link>
-        <guid isPermaLink="true">/the-environment/</guid>
+        <title>And...we are still alive</title>
+        <description>&lt;p&gt;It’s not like this blog is super popular, but it’s nice to have a place where I can collect my thoughts.&lt;/p&gt; &lt;p&gt;I’ve meant to do this since the beginning of the Year, but being the eclectic guy I was involved in some AI projects and SalesForce work. For the records, I’m not good at AI yet, and SalesForce “cool factor” is gone (sorry fans of SalesForce), so I didn’t feel like blogging about it.&lt;/p&gt; &lt;p&gt;There is also the blog itself. The previous version was made with a local version of Ghost, but it wasn’t easy to maintain it online (since...</description>
+        <pubDate>Sat, 16 Sep 2017 14:53:49 -0500</pubDate>
+        <link>http://localhost:4000/and-we-are-still-alive/</link>
+        <guid isPermaLink="true">http://localhost:4000/and-we-are-still-alive/</guid>
         
-        <category>AI</category>
-        
-        <category>Cudas</category>
-        
-        <category>Ubuntu Mate</category>
-        
-        <category>Anaconda</category>
-        
-        <category>Hardware</category>
+        <category>rant</category>
         
         
       </item>
     
       <item>
-        <title>How to use</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt; switch) to see your changes! To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt; &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt; &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt; &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most...</description>
-        <pubDate>Sun, 14 May 2017 15:28:30 -0500</pubDate>
-        <link>/a-test/</link>
-        <guid isPermaLink="true">/a-test/</guid>
+        <title>And...we are still alive</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt; switch) to see your changes! To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt; &lt;p&gt;http://localhost:3000/specs/index.html&lt;/p&gt; &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt; &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt; &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the...</description>
+        <pubDate>Fri, 15 Sep 2017 14:53:49 -0500</pubDate>
+        <link>http://localhost:4000/another-test/</link>
+        <guid isPermaLink="true">http://localhost:4000/another-test/</guid>
         
-        <category>jekyll</category>
+        <category>test</category>
         
-        <category>template</category>
-        
-        
-        <category>I love Jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt; &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt; &lt;p&gt;Jekyll also...</description>
-        <pubDate>Sun, 23 Apr 2017 13:15:02 -0500</pubDate>
-        <link>/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">/welcome-to-jekyll/</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Jekyll</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-w&lt;/code&gt; switch) to see your changes! To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt; &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt; &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt; &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most...</description>
-        <pubDate>Mon, 03 Aug 2015 22:21:35 -0500</pubDate>
-        <link>/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">/welcome-to-jekyll/</guid>
-        
-        <category>jekyll</category>
-        
-        <category>web</category>
-        
-        
-        <category>Jekyll is awesome</category>
-        
-      </item>
-    
-      <item>
-        <title>How to use</title>
-        <description>&lt;p&gt;This is a simple and minimalist template for Jekyll designed for developers that want to write blog posts but don’t want to care about frontend stuff.&lt;/p&gt; &lt;p&gt;The Theme features:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Gulp&lt;/li&gt; &lt;li&gt;Stylus (Jeet, Rupture, Kouto Swiss)&lt;/li&gt; &lt;li&gt;Smoothscroll&lt;/li&gt; &lt;li&gt;Live Search&lt;/li&gt; &lt;li&gt;Offcanvas Menu&lt;/li&gt; &lt;li&gt;SVG icons&lt;/li&gt; &lt;li&gt;Shell Script to create posts&lt;/li&gt; &lt;li&gt;Tags page&lt;/li&gt; &lt;li&gt;Series page&lt;/li&gt; &lt;li&gt;About Me page&lt;/li&gt; &lt;li&gt;Feed RSS&lt;/li&gt; &lt;li&gt;Sitemap.xml&lt;/li&gt; &lt;li&gt;Color Customization&lt;/li&gt; &lt;li&gt;Info Customization&lt;/li&gt; &lt;/ul&gt; &lt;h2 id=&quot;basic-setup&quot;&gt;Basic Setup&lt;/h2&gt; &lt;ol&gt; &lt;li&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Install Jekyll&lt;/a&gt;&lt;/li&gt; &lt;li&gt;Fork the &lt;a href=&quot;https://github.com/willianjusten/will-jekyll-template/fork&quot;&gt;Will Jekyll Template&lt;/a&gt;&lt;/li&gt; &lt;li&gt;Clone the repo you just forked.&lt;/li&gt; &lt;li&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; to personalize your site.&lt;/li&gt; &lt;li&gt;Check out the sample posts in &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; to see examples...</description>
-        <pubDate>Sun, 02 Aug 2015 22:32:44 -0500</pubDate>
-        <link>/how-to-use/</link>
-        <guid isPermaLink="true">/how-to-use/</guid>
-        
-        <category>jekyll</category>
-        
-        <category>template</category>
-        
-        
-        <category>I love Jekyll</category>
         
       </item>
     
