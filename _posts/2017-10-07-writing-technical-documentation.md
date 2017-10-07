@@ -19,6 +19,6 @@ Asciidoc docs are plain text, so it lives pretty well within github or bitbucket
 
 For my own docs, I have an "stylesheet" applied to the way the document is rendered (based on Zurb's Foundation), so it doesn't look too boring. When sharing this with potential co-writers, is important to also have a styleguide, so we all share a common standard on how the documentation is going to be stylized (e.g. header, vs. subheader, etc.) Something like the one used for [O'Reilly Books](http://docs.atlas.oreilly.com/writing_in_asciidoc.html) which is also in asciidoc.
 
-Obviously, I don't feel like installing all the dependencies needed to make an asciidoc render as an HTML, PDF, ebook or whatever. Luckily, there is a [dockefile](https://github.com/asciidoctor/docker-asciidoctor) for that.
+Obviously, I don't feel like installing all the dependencies needed to make an asciidoc render as an HTML, PDF, ebook or whatever. Luckily, there is a [dockerfile](https://github.com/asciidoctor/docker-asciidoctor) for that.
 
 PS. Asciidoctor and Asciidoc are not the same, but they are so similar that it shouldn't really matter much. For a detail list of differences, you can check [here](http://asciidoctor.org/docs/asciidoc-asciidoctor-diffs/)
