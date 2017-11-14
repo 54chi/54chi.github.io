@@ -10,17 +10,19 @@ tags:
 ---
 I always thought that adding stuff to [Docker Hub](https://hub.docker.com/) was something that I'll never do. 
 
-I mean, most images out there do very well by themselves and me and my team will be ok to spawn our own docker containers from a file inside a repo or something.
+I mean, most images out there do very well by themselves and if I needed something else, I could just spawn my own docker containers from a file (or a files) in my local pc, repo or something (the trusty dockerfile).
 
 That changed this week.
 
-You see, I am using asciidoctor more and more these days, and luckily more people at work are getting involved. Sadly, not many of them have the knowledge or patience to figure out how to get started from a dockerfile, and would prefer to run it from a nice GUI like kitematic or what not.
+You see, I am using asciidoctor more and more these days, so more people at work have started to get involved. But not many of them have the knowledge or patience to figure out how to get started from a dockerfile, and would prefer to run it from a nice GUI like kitematic or what not. It also help keep things feel more standardized too, since you reduce the risk of some rogue agent adding his/her own custom "one more thing" to his/her dockerfile.
 
-Since the official [asciidoctor image](https://hub.docker.com/r/asciidoctor/docker-asciidoctor/) was missing a key feature for us (the compass builder for stylesheets and node.js), I made  anew dockerfile and published in docker hub.
+The official [asciidoctor image](https://hub.docker.com/r/asciidoctor/docker-asciidoctor/) is pretty good already, but for us it was missing a couple features that we needed in our workflow:
+- Node.js and
+- The compass builder for stylesheets
 
-It is available [here](https://hub.docker.com/r/numero2/num2_asciidoc/)
+The github repo for the dockerfile is [here](https://github.com/54chi/DockerfileAsciidoc/blob/master/Dockerfile), and the ready to use image is available [at Docker Hub here](https://hub.docker.com/r/numero2/num2_asciidoc/)
 
-I also learned a way to upload docker images. It turned to be really simple:
+Thanks to this, I learned a simple method to upload docker images. For anyone curious, here it is:
 
 1. Login into [Docker Hub](https://hub.docker.com/) and create a new repository. You can create an *org* to use as your namespace if you prefer to.  
 1. Enter a short description, long description and select visibility. Click on create.
@@ -34,6 +36,4 @@ I also learned a way to upload docker images. It turned to be really simple:
 
 After a few minutes (depending on your internet speed and image size), you'll have your image uploaded for anyone else to use :)
 
-I originally expected that all that dockerhub needed was the dockerfile file, but apparently that was not the case and they needed the whole image to be uploaded. That's a bummer, because I have a few dockefiles from previous projects that I may want to upload into the "numero2" org but don't have their images anymore (which will take some time to build and I'm lazy). 
-
-Perhaps sometime in the future.
+PS. Docker hub needs the whole image to be uploaded, not just the dockerfile file.
