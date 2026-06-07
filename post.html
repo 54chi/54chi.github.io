@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>54chi</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">54chi</a></h1>
+    <nav><a href="about.html">About</a></nav>
+  </header>
+  <main>
+    <a class="back" href="index.html">← All posts</a>
+    <article id="post-content">Loading…</article>
+  </main>
+  <footer>
+    <p><a href="index.html">54chi</a></p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const slug = new URLSearchParams(window.location.search).get('slug');
+    const el = document.getElementById('post-content');
+
+    if (!slug) {
+      el.textContent = 'No post specified.';
+    } else {
+      fetch('posts/' + slug + '.md')
+        .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function(text) {
+          // Strip and parse front matter
+          var fmMatch = text.match(/^---\n([\s\S]*?)\n---\n\n?([\s\S]*)$/);
+          var body = fmMatch ? fmMatch[2] : text;
+          var fm = fmMatch ? fmMatch[1] : '';
+
+          var titleMatch = fm.match(/^title:\s*"?(.+?)"?\s*$/m);
+          var dateMatch  = fm.match(/^date:\s*(.+?)\s*$/m);
+
+          var title = titleMatch ? titleMatch[1] : slug;
+          var date  = dateMatch  ? dateMatch[1]  : '';
+
+          document.title = title + ' | 54chi';
+
+          var header = '<h1>' + title + '</h1>'
+            + (date ? '<p class="post-meta">' + date + '</p>' : '');
+
+          el.innerHTML = header + marked.parse(body);
+        })
+        .catch(function() { el.textContent = 'Post not found.'; });
+    }
+  </script>
+</body>
+</html>

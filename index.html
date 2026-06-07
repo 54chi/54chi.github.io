@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>54chi</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">54chi</a></h1>
+    <nav><a href="about.html">About</a></nav>
+  </header>
+  <main id="post-list">Loading…</main>
+  <footer>
+    <p><a href="index.html">54chi</a></p>
+  </footer>
+  <script>
+    fetch('posts.json')
+      .then(function(r) { return r.json(); })
+      .then(function(posts) {
+        var byYear = {};
+        for (var i = 0; i < posts.length; i++) {
+          var p = posts[i];
+          var year = p.date.slice(0, 4);
+          if (!byYear[year]) byYear[year] = [];
+          byYear[year].push(p);
+        }
+
+        var years = Object.keys(byYear).sort(function(a, b) { return b - a; });
+        var html = '';
+        for (var j = 0; j < years.length; j++) {
+          var yr = years[j];
+          html += '<section class="year-section"><h2>' + yr + '</h2><ul>';
+          var entries = byYear[yr];
+          for (var k = 0; k < entries.length; k++) {
+            var entry = entries[k];
+            html += '<li>'
+              + '<span class="date">' + entry.date + '</span>'
+              + ' <a href="post.html?slug=' + entry.slug + '">' + entry.title + '</a>'
+              + '</li>';
+          }
+          html += '</ul></section>';
+        }
+
+        document.getElementById('post-list').innerHTML = html;
+      })
+      .catch(function() {
+        document.getElementById('post-list').textContent = 'Could not load posts.';
+      });
+  </script>
+</body>
+</html>

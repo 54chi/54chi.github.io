@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/csscomics.css" />
+  
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/" />
+    <meta name="referrer" content="origin" />
+    
+    <meta property="og:site_name" content="54chi" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)" />
+    <meta property="og:description" content="10 years ago, I remember discovering this new programming language where one of the most popular tutorials were made as a cartoon. It was fun to write, and made a lot of sense (vs. the usual Java, .Net and PHP..." />
+    <meta property="og:url" content="http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/" />
+    <meta property="og:image" content="http://54chi.github.io/content/images/2016/03/matryoshka.jpg" />
+    <meta property="article:published_time" content="2016-03-15T20:41:30.139Z" />
+    <meta property="article:modified_time" content="2016-03-16T02:00:48.380Z" />
+    <meta property="article:tag" content="blog" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)" />
+    <meta name="twitter:description" content="10 years ago, I remember discovering this new programming language where one of the most popular tutorials were made as a cartoon. It was fun to write, and made a lot of sense (vs. the usual Java, .Net and PHP..." />
+    <meta name="twitter:url" content="http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/" />
+    <meta name="twitter:image:src" content="http://54chi.github.io/content/images/2016/03/matryoshka.jpg" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "54chi",
+    "author": {
+        "@type": "Person",
+        "name": "54chi",
+        "url": "http://54chi.github.io/author/54chi",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)",
+    "url": "http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/",
+    "datePublished": "2016-03-15T20:41:30.139Z",
+    "dateModified": "2016-03-16T02:00:48.380Z",
+    "image": "http://54chi.github.io/content/images/2016/03/matryoshka.jpg",
+    "keywords": "blog",
+    "description": "10 years ago, I remember discovering this new programming language where one of the most popular tutorials were made as a cartoon. It was fun to write, and made a lot of sense (vs. the usual Java, .Net and PHP..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="54chi" href="http://54chi.github.io/rss/" />
+</head>
+<body class="post-template tag-blog nav-closed">
+
+    <nav class="nav">
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-blog" role="presentation"><a href="../tag/blog.2">Blog</a></li>
+            <li class="nav-comics" role="presentation"><a href="../tag/csscomics.2">Comics</a></li>
+            <li class="nav-projects" role="presentation"><a href="../tag/projects.2">Projects</a></li>
+            <li class="nav-trips" role="presentation"><a href="../tag/trips.2">Trips</a></li>
+    </ul>
+</nav>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head " style="background-image: url(../content/images/2016/03/matryoshka.jpg)">
+    <nav class="main-nav overlay clearfix">
+        <a class="blog-logo" href="http://54chi.github.io"><img src="../content/images/2015/12/127414.png" alt="54chi" /></a>
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-blog">
+
+        <header class="post-header">
+            <h1 class="post-title">Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-03-15">15 March 2016</time>  on <a href="../tag/blog/index.html">blog</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>10 years ago, I remember discovering this new programming language where one of the most popular tutorials were made as a cartoon. It was fun to write, and made a lot of sense (vs. the usual Java, .Net and PHP of that time). The premise was to make the dev life easier, so he/she can focus on the important things of the solution, instead of learning some weird syntax.</p>
+
+<p>A couple months later, someone announced a framework on top of this language, with the goal of giving "instant gratification" and changing the way software was made up to that point.</p>
+
+<p>The language was Ruby, and the framework was Rails. It took a few years for it to catch up, and now there are several software companies that deliver rails-based apps.</p>
+
+<p>Rails was made for quick development (instant gratification, remember?), and although it was a joy to use, it was a huge pain to scale to the enterprise level (everybody remembers the early days of Twitter, right?). Rails is slower than your average compiled language, but there is little doubt that code done in Rails if on average of higher quality than the ones made in PHP, Java or .Net, thanks to its "opinionated" approach.</p>
+
+<p>So, it reigned as the "cool" language for a while.</p>
+
+<p>Until NodeJS came, and became more and more popular.</p>
+
+<p>NodeJS base was the chrome browser Javascript interpreter. Because of its simplicity, it was lighter and faster than many other languages out there. Its main selling point is that it is just Javascript...and that can handle millions of transactions in commodity hardware (try to do that with a Java based enterprise solution, for example).</p>
+
+<p>That was on paper, at least.</p>
+
+<p>NodeJS is also single-threaded by default, which means that all these "multi-core" intel chips were underutilized. It also runs everything in an async way, so you had to know you way if you want to keep a sequential process under control. But once all the difficulties were surpassed, it worked fine. Many rails developers started the migration to NodeJS.</p>
+
+<p>But people missed the nice syntax, the opinionated framework, the ease of use that Rails had. So, some dude from the Rails community embarked on a quest to find an alternative.</p>
+
+<p>And Elixir was born.</p>
+
+<p>Elixir is the Ruby equivalent of Rails, but with Erlang as its base. Erlang is a very old functional language (it was made for telecommunication companies), but is unbelievable fast and efficient when running concurrent processes. And because the Erlang virtual machine was created with this principles in mind, it is more stable too. Programs can run for years without any need for rebooting (e.g. because of the infamous memory leak). And you'll never need to shutdown a server because of updates in the code.</p>
+
+<p>Sounds great. But...what's the catch?</p>
+
+<p>The syntax is awful for most humans. Elixir solved this, by creating a layer on top of Erlang that looks very much like Ruby: elegant, and easy to understand. It also took inspiration from Scala, Lisp and Clojure,</p>
+
+<p>But Elixir by itself can't do much for the web. Routers, APIs, database connectors are not part of it. It needed a web framework. Thus Phoenix came.</p>
+
+<p>Phoenix code is like Rails, except that it is on top of Elixir. It shines when you need real time applications and/or thousands of transactions at the same time. It is also very nice to use. Just like rails.</p>
+
+<p>Except that it is 20 times faster than Rails. And requires less hardware to run. And is more stable too, because of that Erlang VM thingy.</p>
+
+<p>So far so good?</p>
+
+<p>Cool.</p>
+
+<p>Similar to what happened with Rails, you can create full stack apps with the Phoenix Framework. But the front end development moves faster than the backend these days, so whatever the framework gives you out of the box may not be what you want. E.g. it used to be jquery, then backbone, then angular, now react, etc. etc.</p>
+
+<p>Enter Elm.</p>
+
+<p>Elm follows the functional programming, but it is also reactive (FRP - Functional Reactive Programming), which makes working with Phoenix a breeze. The reason why I may not want any of the other more popular ones are because the level of abstraction that Elm gets (Elm code compiles to html, css and javascript at the same time), and it is very easy to make Elm a separate app that uses Phoenix, a precompiler for Phoenix code or code that runs within Phoenix with no major changes (I read somewhere that Phoenix uses Elm already to compile its stuff)</p>
+
+<p>So: 2016 is going to be the year where I get to do this stuff. Not just because I want to, but because I believe this is the future (future=the next couple years :p). Enterprise IT has reached the level of maturity where they realize how important UX is to gain engagement, but the tools that are out there are based on code made when most people didn't know what internet was (e.g. async services/response time, heavy frameworks, no support for IoT, high hw demand, license costs, etc.).</p>
+
+<p>I'll most likely push some of my NodeJS projects down the pipeline (or replace them with Elixir/Phoenix). E.g. I'm moving the Enterprise Collab tool that I had planned for July up for April. We'll see how far I get before complaining :D</p>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/54chi/index.html">54chi</a></h4>
+
+                    <p>Read <a href="../author/54chi/index.html">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Elm%20on%20top%20of%20Phoenix%2C%20on%20top%20of%20Elixir%2C%20on%20top%20of%20Erlang%20(and%20still%20superfast!!)&amp;url=http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://54chi.github.io/elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang/"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../when-in-doubt-blame-developers/index.html">
+        <section class="post">
+            <h2>When in doubt, blame the developers</h2>
+            <p>The Client is complaining that the solution is much slower and costlier than the one they already have                                                                                 It's&hellip;</p>
+        </section>
+    </a>
+    <a class="read-next-story prev " style="background-image: url(../content/images/2016/03/Arenal-pixinn-net-.jpg)" href="../san-jose-not-really-costa-rican/index.html">
+        <section class="post">
+            <h2>San Jose, not really Costa Rican, but then again...</h2>
+            <p>First impression: it is very hot.  Second impression: it is very nice.  Third impression: they have Uber!!  Fourth impression:&hellip;</p>
+        </section>
+    </a>
+</aside>
+
+
+
+    </div>
+
+
+    <script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72923351-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="../assets/js/index.js"></script>
+
+</body>
+</html>
