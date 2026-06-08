@@ -1,3 +1,0 @@
-User-agent: *
-Sitemap: http://54chi.github.io/sitemap.xml
-Disallow: /ghost/

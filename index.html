@@ -1,37 +1,54 @@
----
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>54chi</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">54chi</a></h1>
+    <nav><a href="about.html">About</a></nav>
+  </header>
+  <main id="post-list">Loading…</main>
+  <footer>
+    <p><a href="index.html">54chi</a></p>
+  </footer>
+  <script>
+    fetch('posts.json')
+      .then(function(r) { return r.json(); })
+      .then(function(posts) {
+        var byYear = {};
+        for (var i = 0; i < posts.length; i++) {
+          var p = posts[i];
+          var year = p.date.slice(0, 4);
+          if (!byYear[year]) byYear[year] = [];
+          byYear[year].push(p);
+        }
 
-<main id="scroll" class="home" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
-    {% for post in site.posts %}
-        <article role="article" class="post-item" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-                <a class="datetime" href="{{ post.url | prepend: site.baseurl }}">
-                    <meta itemprop="datePublished" content="{{post.date}}">
-                    <time datetime="{{ post.date | date_to_xmlschema }}">
-                        <span class="day">
-                            {{ post.date | date: "%d" }}
-                        </span>
-                        <span class="month-year">
-                            {{ post.date | date: "%B %Y" }}
-                        </span>
-                    </time>
-                </a>
-                <div class="content">
-                    <a href="{{ post.url | prepend: site.baseurl }}"><h2 class="post-title" itemprop="name">{{ post.title }}</h2></a>
-                    <p class="description">
-                        {{ post.content | strip_html | truncatewords:40 }}
-                        <a href="{{ post.url | prepend: site.baseurl }}" class="link">Read more about {{post.title}}</a>
-                    </p>
+        var years = Object.keys(byYear).sort(function(a, b) { return b - a; });
+        var html = '';
+        for (var j = 0; j < years.length; j++) {
+          var yr = years[j];
+          html += '<section class="year-section"><h2>' + yr + '</h2><ul>';
+          var entries = byYear[yr];
+          for (var k = 0; k < entries.length; k++) {
+            var entry = entries[k];
+            html += '<li>'
+              + '<span class="date">' + entry.date + '</span>'
+              + ' <a href="post.html?slug=' + entry.slug + '">' + entry.title + '</a>'
+              + '</li>';
+          }
+          html += '</ul></section>';
+        }
 
-                    <div class="tags">
-                        {% for tag in post.tags %}
-                            <a href="{{ site.baseurl }}/tags/#{{tag | slugify }}">{{ tag }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-        </article>
-    {% endfor %}
-</main>
+        document.getElementById('post-list').innerHTML = html;
+      })
+      .catch(function() {
+        document.getElementById('post-list').textContent = 'Could not load posts.';
+      });
+  </script>
+</body>
+</html>
