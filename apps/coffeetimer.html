@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Coffee Timer</title>
+<style>
+  :root {
+    --bg: #1a1008;
+    --surface: #2a1e10;
+    --surface2: #3a2a18;
+    --accent: #c8833b;
+    --accent2: #e8a85a;
+    --warn: #e85a2a;
+    --text: #f0e8d8;
+    --text2: #a89070;
+    --radius: 16px;
+    --ring-size: 240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .screen { display: none; flex-direction: column; min-height: 100dvh; }
+  .screen.active { display: flex; }
+
+  .header {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header h1 { font-size: 1.4rem; font-weight: 700; color: var(--accent2); flex: 1; }
+  .back-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+  }
+  .header .icon-btn {
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid var(--surface2);
+    background: none;
+    color: var(--text2);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .recipe-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .recipe-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: background 0.15s;
+    border: 1.5px solid transparent;
+  }
+  .recipe-card:active { background: var(--surface2); }
+
+  .recipe-card-main { flex: 1; min-width: 0; }
+  .method-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--surface2);
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .recipe-name { font-size: 1rem; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .recipe-meta { font-size: 0.8rem; color: var(--text2); }
+
+  .fav-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .fav-btn:active { transform: scale(1.3); }
+
+  #screen-recipe { overflow-y: auto; }
+  .recipe-detail-body { padding: 0 20px 32px; flex: 1; }
+
+  .recipe-hero {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .recipe-hero h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+  .recipe-hero .author { font-size: 0.85rem; color: var(--text2); margin-bottom: 14px; }
+  .recipe-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .spec { background: var(--surface2); border-radius: 10px; padding: 10px 12px; }
+  .spec-label { font-size: 0.7rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .spec-value { font-size: 0.95rem; font-weight: 600; }
+
+  .gram-picker {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .gram-picker label { flex: 1; font-size: 0.95rem; font-weight: 600; }
+  .gram-picker label span { display: block; font-size: 0.75rem; font-weight: 400; color: var(--text2); margin-top: 2px; }
+  .gram-ctrl { display: flex; align-items: center; gap: 8px; }
+  .gram-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: none;
+    color: var(--accent);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .gram-btn:active { background: var(--accent); color: #fff; }
+  #gram-input {
+    width: 56px;
+    text-align: center;
+    background: var(--surface2);
+    border: none;
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 6px;
+    -moz-appearance: textfield;
+  }
+  #gram-input::-webkit-inner-spin-button { display: none; }
+
+  .steps-preview { margin-bottom: 24px; }
+  .steps-preview h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text2); margin-bottom: 12px; }
+  .step-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--surface2);
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-time { font-size: 0.85rem; font-weight: 700; color: var(--accent); min-width: 40px; padding-top: 2px; }
+  .step-desc { font-size: 0.9rem; color: var(--text); line-height: 1.4; }
+
+  .start-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .start-btn:active { background: var(--accent2); }
+
+  #screen-brew { background: var(--bg); justify-content: space-between; }
+
+  .brew-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .step-indicator { flex: 1; text-align: center; font-size: 0.85rem; color: var(--text2); }
+  .step-indicator strong { color: var(--text); }
+
+  .brew-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 28px;
+  }
+
+  .ring-wrap {
+    position: relative;
+    width: var(--ring-size);
+    height: var(--ring-size);
+  }
+  .ring-wrap.pulsing {
+    animation: pulse-ring 0.5s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-ring {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+
+  #brew-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .ring-track { fill: none; stroke: var(--surface2); stroke-width: 10; }
+  .ring-progress {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke 0.3s;
+  }
+  .ring-progress.pulsing { stroke: var(--warn); }
+
+  .ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  #brew-time-display {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  #brew-step-label {
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  #brew-step-desc {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 320px;
+    padding: 0 10px;
+  }
+
+  .prep-ring { opacity: 0; pointer-events: none; }
+  #continue-btn {
+    padding: 14px 40px;
+    border-radius: 50px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: none;
+  }
+  #continue-btn.visible { display: block; }
+
+  .brew-controls {
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+  .ctrl-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--text2);
+    cursor: pointer;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.15s;
+  }
+  .ctrl-btn:active { color: var(--accent); }
+  .ctrl-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+  #pause-btn .ctrl-icon { background: var(--accent); font-size: 1.4rem; }
+  #pause-btn { color: var(--text); }
+
+  .complete-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 100;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .complete-overlay.visible { display: flex; }
+  .complete-icon { font-size: 4rem; }
+  .complete-overlay h2 { font-size: 1.5rem; font-weight: 700; }
+  .complete-overlay p { color: var(--text2); text-align: center; padding: 0 30px; line-height: 1.5; }
+  .complete-actions { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 0 30px; }
+  .complete-actions button {
+    padding: 14px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #complete-fav-btn { background: var(--surface); color: var(--text); }
+  #complete-home-btn { background: var(--accent); color: #fff; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text2);
+    display: none;
+  }
+  .empty-state.visible { display: block; }
+  .empty-state p { margin-top: 8px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<section id="screen-list" class="screen active">
+  <div class="header">
+    <h1>&#9749; Coffee Timer</h1>
+    <button class="icon-btn" title="Info" onclick="alert('Coffee Timer v1.0\n\nA standalone recipe timer for specialty coffee.')">&#9432;</button>
+  </div>
+  <div class="tabs" id="filter-tabs">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="fav">&#9829; Favorites</button>
+    <button class="tab" data-filter="V60">V60</button>
+    <button class="tab" data-filter="AeroPress">AeroPress</button>
+    <button class="tab" data-filter="French Press">French Press</button>
+    <button class="tab" data-filter="Chemex">Chemex</button>
+    <button class="tab" data-filter="Espresso">Espresso</button>
+    <button class="tab" data-filter="Moka Pot">Moka Pot</button>
+  </div>
+  <div class="recipe-list" id="recipe-list"></div>
+  <div class="empty-state" id="empty-state">
+    <div style="font-size:2rem">&#9829;</div>
+    <p>No favorites yet.<br>Tap the heart on any recipe to save it here.</p>
+  </div>
+</section>
+
+<section id="screen-recipe" class="screen">
+  <div class="header">
+    <button class="back-btn" onclick="showScreen('list')">&#8249;</button>
+    <h1 id="detail-method-label"></h1>
+    <button class="fav-btn" id="detail-fav-btn" onclick="toggleFavDetail()"></button>
+  </div>
+  <div class="recipe-detail-body">
+    <div class="recipe-hero">
+      <h2 id="detail-name"></h2>
+      <div class="author" id="detail-author"></div>
+      <div class="recipe-specs">
+        <div class="spec">
+          <div class="spec-label">Coffee</div>
+          <div class="spec-value" id="spec-coffee"></div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Water</div>
+          <div class="spec-value" id="spec-water"></div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Grind Size</div>
+          <div class="spec-value" id="spec-grind"></div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Water Temp</div>
+          <div class="spec-value" id="spec-temp"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gram-picker">
+      <label for="gram-input">
+        Coffee Amount
+        <span id="gram-water-hint"></span>
+      </label>
+      <div class="gram-ctrl">
+        <button class="gram-btn" onclick="adjustGrams(-1)">&#8722;</button>
+        <input type="number" id="gram-input" min="1" max="100" value="15" oninput="onGramChange()">
+        <button class="gram-btn" onclick="adjustGrams(1)">+</button>
+      </div>
+    </div>
+
+    <div class="steps-preview">
+      <h3>Recipe Steps</h3>
+      <div id="steps-preview-list"></div>
+    </div>
+
+    <button class="start-btn" onclick="startBrew()">Start Brewing &#8594;</button>
+  </div>
+</section>
+
+<section id="screen-brew" class="screen">
+  <div class="brew-header">
+    <button class="back-btn" onclick="confirmStopBrew()">&#8249;</button>
+    <div class="step-indicator" id="step-indicator"></div>
+    <div style="width:28px"></div>
+  </div>
+
+  <div class="brew-center">
+    <div class="ring-wrap" id="ring-wrap">
+      <svg id="brew-svg" viewBox="0 0 240 240">
+        <circle class="ring-track" cx="120" cy="120" r="108"/>
+        <circle class="ring-progress" id="ring-progress" cx="120" cy="120" r="108"
+          stroke-dasharray="678.6" stroke-dashoffset="0"/>
+      </svg>
+      <div class="ring-label">
+        <div id="brew-time-display">0:00</div>
+        <div id="brew-step-label"></div>
+      </div>
+    </div>
+
+    <div id="brew-step-desc"></div>
+
+    <button id="continue-btn" onclick="advanceStep()">Continue &#8594;</button>
+  </div>
+
+  <div class="brew-controls">
+    <button class="ctrl-btn" onclick="prevStep()">
+      <div class="ctrl-icon">&#9198;</div>
+      Back
+    </button>
+    <button class="ctrl-btn" id="pause-btn" onclick="togglePause()">
+      <div class="ctrl-icon" id="pause-icon">&#9208;</div>
+      <span id="pause-label">Pause</span>
+    </button>
+    <button class="ctrl-btn" onclick="advanceStep()">
+      <div class="ctrl-icon">&#9197;</div>
+      Skip
+    </button>
+  </div>
+</section>
+
+<div class="complete-overlay" id="complete-overlay">
+  <div class="complete-icon">&#9749;</div>
+  <h2>Brew Complete!</h2>
+  <p id="complete-msg"></p>
+  <div class="complete-actions">
+    <button id="complete-fav-btn" onclick="toggleFavComplete()"></button>
+    <button id="complete-home-btn" onclick="goHome()">Back to Recipes</button>
+  </div>
+</div>
+
+<script>
+const RECIPES = [
+  {
+    id: 'v60-hoffmann',
+    method: 'V60',
+    name: 'The Ultimate V60',
+    author: 'James Hoffmann',
+    defaultCoffee: 15,
+    defaultWater: 250,
+    grindSize: 'Medium-fine',
+    waterTemp: '93°C / 200°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Fold and rinse a paper filter. Add {coffee}g of ground coffee. Place on scale and tare. Have {water}ml of water ready at {temp}.' },
+      { time: 0, label: 'Bloom', description: 'Pour {bloom}ml of water, saturating all grounds evenly. Start your timer.', tokens: { bloom: w => Math.round(w * 0.2) } },
+      { time: 45, label: 'First Pour', description: 'Pour in a slow spiral to {half}ml total.', tokens: { half: w => Math.round(w * 0.6) } },
+      { time: 90, label: 'Second Pour', description: 'Continue pouring up to {water}ml total in a slow, steady spiral.' },
+      { time: 150, label: 'Swirl', description: 'Give the dripper a gentle swirl to flatten the coffee bed.' },
+      { time: 210, label: 'Done', description: 'Wait for the drawdown to finish. Enjoy your cup! ☕', last: true },
+    ],
+  },
+  {
+    id: 'v60-kasuya',
+    method: 'V60',
+    name: '4:6 Method',
+    author: 'Tetsu Kasuya',
+    defaultCoffee: 20,
+    defaultWater: 300,
+    grindSize: 'Coarse',
+    waterTemp: '93°C / 200°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Rinse a V60 paper filter. Grind {coffee}g coarsely. Place on scale and tare. Water at {temp}.' },
+      { time: 0, label: '1st Pour (40%)', description: 'Pour {p1}ml of water. This first 40% controls sweetness.', tokens: { p1: w => Math.round(w * 0.2) } },
+      { time: 45, label: '2nd Pour (40%)', description: 'Pour another {p1}ml, reaching {p2}ml total.', tokens: { p1: w => Math.round(w * 0.2), p2: w => Math.round(w * 0.4) } },
+      { time: 90, label: '3rd Pour (60%)', description: 'Pour {p3}ml. This second 60% controls strength.', tokens: { p3: w => Math.round(w * 0.2) } },
+      { time: 135, label: '4th Pour', description: 'Pour another {p3}ml.', tokens: { p3: w => Math.round(w * 0.2) } },
+      { time: 180, label: '5th Pour', description: 'Final pour to reach {water}ml total.' },
+      { time: 240, label: 'Done', description: 'Let it drawdown completely. Enjoy your balanced cup! ☕', last: true },
+    ],
+  },
+  {
+    id: 'aeropress-van-bunnik',
+    method: 'AeroPress',
+    name: 'Inverted AeroPress #1',
+    author: 'Wendelien Van Bunnik',
+    defaultCoffee: 16,
+    defaultWater: 230,
+    grindSize: 'Coarse',
+    waterTemp: '95°C / 203°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Place two paper filters in the cap and rinse with hot water. Push air bubbles out with the paddle. Discard rinse water. Set up AeroPress inverted. Add {coffee}g of ground coffee. Give it a shake to level the grounds.' },
+      { time: 0, label: 'Pour Water', description: 'Pour {water}ml of water ({temp}) over the grounds.' },
+      { time: 10, label: 'Stir', description: 'Stir gently 5 times.' },
+      { time: 20, label: 'Cap & Wait', description: 'Fasten the filter cap and let it sit.' },
+      { time: 60, label: 'Flip & Press', description: 'Flip the AeroPress onto your cup and press slowly. Stop when you hear a hissing sound.' },
+      { time: 90, label: 'Done', description: 'Enjoy your cup of coffee! ☕', last: true },
+    ],
+  },
+  {
+    id: 'aeropress-wendelboe',
+    method: 'AeroPress',
+    name: 'AeroPress Classic',
+    author: 'Tim Wendelboe',
+    defaultCoffee: 18,
+    defaultWater: 200,
+    grindSize: 'Fine-medium',
+    waterTemp: '80°C / 176°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Rinse one paper filter in the AeroPress cap. Set up AeroPress normally (not inverted) over a sturdy cup. Add {coffee}g of finely ground coffee.' },
+      { time: 0, label: 'Pour', description: 'Pour {water}ml of water at {temp} over the grounds. Stir briskly 10 times.' },
+      { time: 30, label: 'Attach Cap', description: 'Place cap with filter on top. Let steep without pressing.' },
+      { time: 60, label: 'Flip', description: 'Carefully flip the AeroPress onto your cup.' },
+      { time: 90, label: 'Press', description: 'Press down slowly and steadily over 30 seconds.' },
+      { time: 120, label: 'Done', description: 'Remove AeroPress. Dilute if desired. Enjoy! ☕', last: true },
+    ],
+  },
+  {
+    id: 'french-press-hoffmann',
+    method: 'French Press',
+    name: 'French Press (No-Plunge)',
+    author: 'James Hoffmann',
+    defaultCoffee: 30,
+    defaultWater: 500,
+    grindSize: 'Coarse',
+    waterTemp: '99°C / 210°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Preheat French press with hot water. Discard. Add {coffee}g of coarsely ground coffee. Place on scale and tare.' },
+      { time: 0, label: 'Pour', description: 'Pour {water}ml of boiling water. Make sure all grounds are wet. Do not stir.' },
+      { time: 240, label: 'Break Crust', description: 'After 4 minutes, break the crust with a spoon and scoop away any foam and floating grounds.' },
+      { time: 300, label: 'Wait', description: 'Let the grounds sink for 5 more minutes without pressing.' },
+      { time: 600, label: 'Pour Gently', description: 'Lower the plunger gently just to the surface of the liquid (do not press through). Pour slowly into cups.' },
+      { time: 660, label: 'Done', description: 'Enjoy your clean, full-bodied cup! ☕', last: true },
+    ],
+  },
+  {
+    id: 'chemex-classic',
+    method: 'Chemex',
+    name: 'Classic Chemex',
+    author: 'Chemex',
+    defaultCoffee: 42,
+    defaultWater: 700,
+    grindSize: 'Medium-coarse',
+    waterTemp: '93°C / 200°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Open a Chemex filter (3 layers on the spout side). Place in Chemex and rinse with hot water. Discard rinse. Add {coffee}g of ground coffee.' },
+      { time: 0, label: 'Bloom', description: 'Pour {bloom}ml of water over all the grounds. Wait 45 seconds.', tokens: { bloom: w => Math.round(w * 0.143) } },
+      { time: 45, label: 'First Pour', description: 'Pour to {p1}ml total, in a steady spiral from center out.', tokens: { p1: w => Math.round(w * 0.5) } },
+      { time: 150, label: 'Second Pour', description: 'Continue pouring to {p2}ml total.', tokens: { p2: w => Math.round(w * 0.75) } },
+      { time: 270, label: 'Final Pour', description: 'Pour the remaining water to reach {water}ml total.' },
+      { time: 360, label: 'Drawdown', description: 'Wait for the water to fully drain through the filter.' },
+      { time: 480, label: 'Done', description: 'Remove filter, swirl the Chemex gently, and serve. Enjoy! ☕', last: true },
+    ],
+  },
+  {
+    id: 'espresso-basic',
+    method: 'Espresso',
+    name: 'Classic Espresso',
+    author: 'SCA Standard',
+    defaultCoffee: 18,
+    defaultWater: 36,
+    grindSize: 'Fine (espresso)',
+    waterTemp: '93°C / 200°F',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Purge your group head. Grind {coffee}g of fine espresso. Distribute evenly in the portafilter. Tamp with 15–20kg of pressure, level and even.' },
+      { time: 0, label: 'Pre-infusion', description: 'Lock portafilter and start shot. Allow 5–8s pre-infusion if your machine supports it.' },
+      { time: 8, label: 'Extraction', description: 'Shot running. Target {water}ml (1:2 ratio) in about 25–30 seconds total.' },
+      { time: 30, label: 'Stop', description: 'Stop the shot at {water}ml output. Check color — should be golden-brown, no blonding.' },
+      { time: 35, label: 'Done', description: 'Serve immediately or use as base for milk drinks. Enjoy! ☕', last: true },
+    ],
+  },
+  {
+    id: 'moka-pot-classic',
+    method: 'Moka Pot',
+    name: 'Stovetop Moka',
+    author: 'Traditional Italian',
+    defaultCoffee: 17,
+    defaultWater: 200,
+    grindSize: 'Fine-medium',
+    waterTemp: 'Hot (pre-heat water)',
+    steps: [
+      { time: null, label: 'Preparation', description: 'Fill the bottom chamber with {water}ml of hot (not boiling) water up to the safety valve. Add {coffee}g of ground coffee to the basket — do not tamp. Screw on the top firmly.' },
+      { time: 0, label: 'Heat', description: 'Place on low-to-medium heat. Keep the lid open so you can watch the extraction.' },
+      { time: 120, label: 'Watch', description: 'Coffee should start flowing slowly. If it sputters or comes out too fast, adjust heat lower.' },
+      { time: 180, label: 'Remove', description: 'When you hear a hissing/sputtering sound and the chamber is full, remove from heat immediately.' },
+      { time: 210, label: 'Cool Base', description: 'Run the bottom of the pot under cold water for a few seconds to stop extraction.' },
+      { time: 220, label: 'Done', description: 'Pour and enjoy your strong, espresso-like moka coffee! ☕', last: true },
+    ],
+  },
+];
+
+const CIRC = 2 * Math.PI * 108;
+
+let favorites = JSON.parse(localStorage.getItem('cf_favorites') || '[]');
+let lastGrams  = JSON.parse(localStorage.getItem('cf_last_grams')  || '{}');
+let currentFilter = 'all';
+let activeRecipe = null;
+let activeScaledSteps = [];
+let activeStepIndex = 0;
+let scaleFactor = 1;
+let timerRAF = null;
+let timerStart = null;
+let timerElapsed = 0;
+let timerDuration = 0;
+let timerPaused = false;
+
+function saveFavorites() { localStorage.setItem('cf_favorites', JSON.stringify(favorites)); }
+function saveLastGrams()  { localStorage.setItem('cf_last_grams',  JSON.stringify(lastGrams)); }
+function isFav(id)        { return favorites.includes(id); }
+function setFav(id, state) {
+  favorites = favorites.filter(f => f !== id);
+  if (state) favorites.push(id);
+  saveFavorites();
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+
+function buildList() {
+  const list = document.getElementById('recipe-list');
+  const empty = document.getElementById('empty-state');
+  list.innerHTML = '';
+  const filtered = RECIPES.filter(r => {
+    if (currentFilter === 'fav') return isFav(r.id);
+    if (currentFilter === 'all') return true;
+    return r.method === currentFilter;
+  });
+  if (filtered.length === 0) {
+    empty.classList.add('visible');
+  } else {
+    empty.classList.remove('visible');
+    filtered.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'recipe-card';
+      card.dataset.id = r.id;
+      card.innerHTML = `
+        <div class="recipe-card-main">
+          <div class="method-badge">${r.method}</div>
+          <div class="recipe-name">${r.name}</div>
+          <div class="recipe-meta">by ${r.author} &middot; ${formatTime(getBrewTime(r))}</div>
+        </div>
+        <button class="fav-btn" data-id="${r.id}" onclick="toggleFavList(event,'${r.id}')">${isFav(r.id) ? '&#9829;' : '&#9825;'}</button>
+      `;
+      card.addEventListener('click', e => {
+        if (!e.target.classList.contains('fav-btn')) openRecipe(r.id);
+      });
+      list.appendChild(card);
+    });
+  }
+}
+
+function getBrewTime(r) {
+  const timed = r.steps.filter(s => s.time !== null);
+  return timed.length ? Math.max(...timed.map(s => s.time)) : 0;
+}
+
+function toggleFavList(e, id) {
+  e.stopPropagation();
+  setFav(id, !isFav(id));
+  buildList();
+}
+
+document.getElementById('filter-tabs').addEventListener('click', e => {
+  if (!e.target.classList.contains('tab')) return;
+  currentFilter = e.target.dataset.filter;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  buildList();
+});
+
+function openRecipe(id) {
+  activeRecipe = RECIPES.find(r => r.id === id);
+  const grams = lastGrams[id] || activeRecipe.defaultCoffee;
+  document.getElementById('gram-input').value = grams;
+  renderDetail();
+  showScreen('recipe');
+}
+
+function renderDetail() {
+  const r = activeRecipe;
+  const grams = parseInt(document.getElementById('gram-input').value) || r.defaultCoffee;
+  scaleFactor = grams / r.defaultCoffee;
+  const scaledWater = Math.round(r.defaultWater * scaleFactor);
+  const scaledTime  = Math.round(getBrewTime(r) * scaleFactor);
+  document.getElementById('detail-method-label').textContent = r.method;
+  document.getElementById('detail-name').textContent = r.name;
+  document.getElementById('detail-author').textContent = 'by ' + r.author;
+  document.getElementById('detail-fav-btn').textContent = isFav(r.id) ? '♥' : '♡';
+  document.getElementById('spec-coffee').textContent = grams + 'g';
+  document.getElementById('spec-water').textContent  = scaledWater + 'ml';
+  document.getElementById('spec-grind').textContent  = r.grindSize;
+  document.getElementById('spec-temp').textContent   = r.waterTemp;
+  document.getElementById('gram-water-hint').textContent = '→ ' + scaledWater + 'ml water · ' + formatTime(scaledTime) + ' brew';
+  activeScaledSteps = buildScaledSteps(r, grams);
+  const preview = document.getElementById('steps-preview-list');
+  preview.innerHTML = '';
+  activeScaledSteps.forEach(s => {
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    row.innerHTML = '<div class="step-time">' + (s.time === null ? '–' : formatTime(s.time)) + '</div><div class="step-desc">' + s.description + '</div>';
+    preview.appendChild(row);
+  });
+}
+
+function buildScaledSteps(recipe, grams) {
+  const sf = grams / recipe.defaultCoffee;
+  const scaledWater = Math.round(recipe.defaultWater * sf);
+  return recipe.steps.map(s => {
+    let desc = s.description;
+    desc = desc.replace(/\{coffee\}/g, grams);
+    desc = desc.replace(/\{water\}/g, scaledWater);
+    desc = desc.replace(/\{temp\}/g, recipe.waterTemp);
+    if (s.tokens) {
+      for (const [key, fn] of Object.entries(s.tokens)) {
+        desc = desc.replace(new RegExp('\\{' + key + '\\}', 'g'), fn(scaledWater));
+      }
+    }
+    return {
+      time: s.time !== null ? Math.round(s.time * sf) : null,
+      label: s.label,
+      description: desc,
+      last: !!s.last,
+    };
+  });
+}
+
+function adjustGrams(delta) {
+  const input = document.getElementById('gram-input');
+  const val = Math.max(1, Math.min(100, (parseInt(input.value) || activeRecipe.defaultCoffee) + delta));
+  input.value = val;
+  onGramChange();
+}
+
+function onGramChange() {
+  renderDetail();
+  lastGrams[activeRecipe.id] = parseInt(document.getElementById('gram-input').value);
+  saveLastGrams();
+}
+
+function toggleFavDetail() {
+  setFav(activeRecipe.id, !isFav(activeRecipe.id));
+  document.getElementById('detail-fav-btn').textContent = isFav(activeRecipe.id) ? '♥' : '♡';
+}
+
+function startBrew() {
+  activeStepIndex = 0;
+  showScreen('brew');
+  renderBrewStep();
+}
+
+function renderBrewStep() {
+  stopTimer();
+  document.getElementById('complete-overlay').classList.remove('visible');
+  const step = activeScaledSteps[activeStepIndex];
+  const total = activeScaledSteps.length;
+  document.getElementById('step-indicator').innerHTML = 'Step <strong>' + (activeStepIndex + 1) + '</strong> of ' + total;
+  document.getElementById('brew-step-label').textContent = step.label;
+  document.getElementById('brew-step-desc').textContent  = step.description;
+  const isPrep = step.time === null;
+  const continueBtn = document.getElementById('continue-btn');
+  const ringWrap    = document.getElementById('ring-wrap');
+  const pauseBtn    = document.getElementById('pause-btn');
+  if (isPrep) {
+    continueBtn.classList.add('visible');
+    ringWrap.classList.add('prep-ring');
+    pauseBtn.style.opacity = '0.3';
+    pauseBtn.style.pointerEvents = 'none';
+    document.getElementById('brew-time-display').textContent = '–';
+    setRingProgress(1);
+  } else {
+    continueBtn.classList.remove('visible');
+    ringWrap.classList.remove('prep-ring');
+    pauseBtn.style.opacity = '';
+    pauseBtn.style.pointerEvents = '';
+    const nextStep = activeScaledSteps[activeStepIndex + 1];
+    if (nextStep && nextStep.time !== null && step.time !== null) {
+      timerDuration = nextStep.time - step.time;
+    } else if (step.last) {
+      document.getElementById('brew-time-display').textContent = '✓';
+      setRingProgress(1);
+      showComplete();
+      return;
+    } else {
+      timerDuration = 60;
+    }
+    timerElapsed = 0;
+    timerPaused  = false;
+    updatePauseBtn();
+    startTimer();
+  }
+}
+
+function startTimer() {
+  if (timerDuration <= 0) { showComplete(); return; }
+  timerStart = performance.now() - timerElapsed * 1000;
+  timerTick();
+}
+
+function timerTick() {
+  if (timerPaused) return;
+  timerElapsed = (performance.now() - timerStart) / 1000;
+  const remaining = Math.max(0, timerDuration - timerElapsed);
+  updateTimerDisplay(remaining, timerDuration);
+  if (remaining <= 0) { advanceStep(); return; }
+  timerRAF = requestAnimationFrame(timerTick);
+}
+
+function stopTimer() {
+  if (timerRAF) cancelAnimationFrame(timerRAF);
+  timerRAF = null;
+}
+
+function togglePause() {
+  if (timerPaused) {
+    timerPaused = false;
+    timerStart = performance.now() - timerElapsed * 1000;
+    timerTick();
+  } else {
+    timerPaused = true;
+    stopTimer();
+  }
+  updatePauseBtn();
+}
+
+function updatePauseBtn() {
+  document.getElementById('pause-icon').textContent  = timerPaused ? '▶' : '⏸';
+  document.getElementById('pause-label').textContent = timerPaused ? 'Resume' : 'Pause';
+}
+
+function updateTimerDisplay(remaining, total) {
+  document.getElementById('brew-time-display').textContent = formatTime(Math.ceil(remaining));
+  setRingProgress(remaining / total);
+  const pulsing = remaining <= 5 && remaining > 0;
+  document.getElementById('ring-wrap').classList.toggle('pulsing', pulsing);
+  document.getElementById('ring-progress').classList.toggle('pulsing', pulsing);
+}
+
+function setRingProgress(fraction) {
+  const offset = CIRC * (1 - Math.max(0, Math.min(1, fraction)));
+  document.getElementById('ring-progress').style.strokeDashoffset = offset;
+}
+
+function advanceStep() {
+  stopTimer();
+  if (activeStepIndex < activeScaledSteps.length - 1) {
+    activeStepIndex++;
+    renderBrewStep();
+  } else {
+    showComplete();
+  }
+}
+
+function prevStep() {
+  stopTimer();
+  if (activeStepIndex > 0) { activeStepIndex--; renderBrewStep(); }
+}
+
+function confirmStopBrew() {
+  if (confirm('Stop brewing and go back to the recipe?')) { stopTimer(); showScreen('recipe'); }
+}
+
+function showComplete() {
+  stopTimer();
+  document.getElementById('complete-msg').textContent = 'You brewed ' + activeRecipe.name + ' — hope it\'s delicious!';
+  updateCompleteFavBtn();
+  document.getElementById('complete-overlay').classList.add('visible');
+}
+
+function updateCompleteFavBtn() {
+  document.getElementById('complete-fav-btn').textContent = isFav(activeRecipe.id) ? '♥ Saved as Favorite' : '♡ Save as Favorite';
+}
+
+function toggleFavComplete() { setFav(activeRecipe.id, !isFav(activeRecipe.id)); updateCompleteFavBtn(); }
+
+function goHome() {
+  stopTimer();
+  document.getElementById('complete-overlay').classList.remove('visible');
+  buildList();
+  showScreen('list');
+}
+
+function formatTime(seconds) {
+  if (seconds === null || isNaN(seconds)) return '–';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return m + ':' + s.toString().padStart(2, '0');
+}
+
+buildList();
+</script>
+</body>
+</html>
