@@ -24,7 +24,7 @@
 }
 
 :root {
-  --u: 11px;              /* base grid = font design size */
+  --u: 16px;              /* base grid */
 
   --case:        #b8b0a0; /* bezel plastic */
   --case-light:  #d6cfc0;
@@ -143,21 +143,12 @@ body::before {
   background-size: 100% 4px;
 }
 
-/* Aperture-grille tint: three hard vertical bars, RGB order. */
-.fx-on .crt__overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.10;
-  background-image: linear-gradient(
-    to right,
-    #ff0000 0px, #ff0000 2px,
-    #00ff00 2px, #00ff00 4px,
-    #0000ff 4px, #0000ff 6px
-  );
-  background-size: 6px 100%;
-  mix-blend-mode: screen;
-}
+/*
+ * The RGB aperture-grille tint that used to live here is gone on purpose: the
+ * vertical bars sat directly under the body copy and fringed every glyph,
+ * which cost more in legibility than it bought in authenticity. The scanlines
+ * carry the CRT read on their own.
+ */
 
 /* Dithered corner darkening — a checker mask, not a radial gradient. */
 .crt__vignette {
@@ -222,7 +213,9 @@ body::before {
  * body copy over raw dithering is unreadable no matter how pretty it looks.
  */
 .post {
-  max-width: calc(var(--u) * 62);
+  /* Multiplier retuned for the larger --u so the measure stays near 70
+     characters; at the old 62 the line ran past 100 and got hard to track. */
+  max-width: calc(var(--u) * 46);
   margin: 0 auto;
   padding: calc(var(--u) * 2);
   background: rgba(6, 12, 8, 0.82);
@@ -480,7 +473,7 @@ body::before {
 .page .screen__scroll::-webkit-scrollbar-thumb:hover { background: var(--ink); }
 
 .sheet {
-  max-width: calc(var(--u) * 68);
+  max-width: calc(var(--u) * 50);
   margin: 0 auto;
   padding: calc(var(--u) * 2);
   background: rgba(6, 12, 8, 0.86);
@@ -580,7 +573,7 @@ body::before {
 }
 
 @media (max-width: 700px) {
-  :root { --u: 10px; }
+  :root { --u: 14px; }
   .crt { padding: 4px; }
   .crt__frame { padding: 6px; }
   .screen__scroll { padding: var(--u) calc(var(--u) * 0.5) calc(var(--u) * 6); }
@@ -591,7 +584,6 @@ body::before {
   /* Swipe and the panel buttons both cover navigation here, and the arrows
      sit right on top of the body copy at this width. */
   .edge { display: none; }
-  .fx-on .crt__overlay::after { display: none; }
 }
 
 /* Coarse pointers never get hover, so the arrows would otherwise stay invisible. */
