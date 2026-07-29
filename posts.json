@@ -2,277 +2,465 @@
   {
     "slug": "2026-06-08-and-here-we-go-again-again",
     "title": "Here we go again again (now with more AI)",
-    "date": "2026-05-23",
-    "tags": ["rant"]
+    "date": "2026-06-08",
+    "tags": [
+      "rant"
+    ],
+    "time": "18:46"
   },
   {
     "slug": "2026-05-23-welp",
     "title": "And...we are still alive",
     "date": "2026-05-23",
-    "tags": ["rant"]
+    "tags": [
+      "rant"
+    ],
+    "time": "11:07"
   },
   {
     "slug": "2018-04-26-updates",
     "title": "Change of plans",
     "date": "2018-04-26",
-    "tags": ["rant"]
+    "tags": [
+      "rant"
+    ],
+    "time": "19:01"
   },
   {
     "slug": "2018-01-01-busy-new-year",
     "title": "Busy New Year",
     "date": "2018-01-01",
-    "tags": ["rant"]
+    "tags": [
+      "rant"
+    ],
+    "time": "07:52"
   },
   {
     "slug": "2017-11-13-Contributing-to-DockerHub",
     "title": "Contributing to Docker Hub",
     "date": "2017-11-13",
-    "tags": ["docker", "dockerhub", "asciidoc"]
+    "tags": [
+      "docker",
+      "dockerhub",
+      "asciidoc"
+    ],
+    "time": "18:14"
   },
   {
     "slug": "2017-10-16-jwe-encryption-in-nodejs",
     "title": "JWE Encryption in Node JS",
     "date": "2017-10-16",
-    "tags": ["nodejs", "encryption", "node-jose"]
+    "tags": [
+      "nodejs",
+      "encryption",
+      "node-jose"
+    ],
+    "time": "11:15"
   },
   {
     "slug": "2017-10-07-writing-technical-documentation",
     "title": "Writing Technical Documentation",
     "date": "2017-10-07",
-    "tags": ["documentation", "plantuml", "asciidoc"]
+    "tags": [
+      "documentation",
+      "plantuml",
+      "asciidoc"
+    ],
+    "time": "16:02"
   },
   {
     "slug": "2017-09-16-specs",
     "title": "Specs",
     "date": "2017-09-16",
-    "tags": ["projectplan", "projects", "specs", "Hardware"]
+    "tags": [
+      "projectplan",
+      "projects",
+      "specs",
+      "Hardware"
+    ],
+    "time": "20:44"
   },
   {
     "slug": "2017-09-15-and-we-are-still-alive",
     "title": "And...we are still alive",
     "date": "2017-09-15",
-    "tags": ["rant"]
+    "tags": [
+      "rant"
+    ],
+    "time": "20:44"
   },
   {
     "slug": "2016-09-03-back-to-functional-programming",
     "title": "Back to Functional Programming",
     "date": "2016-09-03",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-08-26-hr-project-dayscore",
     "title": "HR Project: Dayscore",
     "date": "2016-08-26",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-08-04-i-made-a-chatbot-here-is-what-i-learned",
     "title": "I made a chatbot. Here is a braindump of what I know so far",
     "date": "2016-08-04",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-07-02-roadmap-2016-middle-point",
     "title": "Roadmap 2016 - Middle point",
     "date": "2016-07-02",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-06-14-iot-project-tap-2-tip-with-nfc",
     "title": "IoT? Project: Tap 2 Tip with NFC",
     "date": "2016-06-14",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-05-17-designing-for-voice-a-point-of-view",
     "title": "Designing for Voice: A Point of View",
     "date": "2016-05-17",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-05-15-iot-project-finding-flight-deals",
     "title": "IoT Project: Finding Flight Deals",
     "date": "2016-05-15",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-04-24-interviewing-tdms",
     "title": "Onboarding 101: How to Find Your Navigation Officer",
     "date": "2016-04-24",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-04-20-the-force-awakens",
     "title": "The Force Awakens",
     "date": "2016-04-20",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-04-10-seiju-elm",
     "title": "Seiju Elm",
     "date": "2016-04-10",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-04-02-html5-project-ii-resume-app",
     "title": "HTML5 project II: Resume App",
     "date": "2016-04-02",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-28-coffee-work-in-chicago",
     "title": "Coffee & Work in Chicago",
     "date": "2016-03-28",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-19-when-in-doubt-blame-developers",
     "title": "When in doubt, blame the developers",
     "date": "2016-03-19",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-15-elm-on-top-of-phoenix-on-top-of-elixir-on-top-of-erlang",
     "title": "Elm on top of Phoenix, on top of Elixir, on top of Erlang (and still superfast!!)",
     "date": "2016-03-15",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-11-san-jose-not-really-costa-rican",
     "title": "San Jose, not really Costa Rican, but then again...",
     "date": "2016-03-11",
-    "tags": ["trips"]
+    "tags": [
+      "trips"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-10-healthcare-stalker",
     "title": "Healthcare Stalker",
     "date": "2016-03-10",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-05-good-dev-lead-bad-dev-lead",
     "title": "Good dev lead, bad dev lead",
     "date": "2016-03-05",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-03-05-march-trip",
     "title": "Roadmap update: March trip",
     "date": "2016-03-05",
-    "tags": ["blog", "trips"]
+    "tags": [
+      "blog",
+      "trips"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-28-investments-project-automated-investment-strategy-algorithm",
     "title": "Investments project: Automated investment strategy algorithm",
     "date": "2016-02-28",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-24-automated-trading",
     "title": "Automated Trading",
     "date": "2016-02-24",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-19-nodejs-project-oriconcast",
     "title": "NodeJS project: oriconCast",
     "date": "2016-02-19",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-19-uml-with-javascript",
     "title": "UML with Javascript",
     "date": "2016-02-19",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-19-why-projects-are-too-complex",
     "title": "Why projects are too complex",
     "date": "2016-02-19",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-15-month-1-review",
     "title": "Progress review",
     "date": "2016-02-15",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-13-country-as-a-service",
     "title": "Country as a Service",
     "date": "2016-02-13",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-02-01-the-exorcist",
     "title": "How to do BDD in your project",
     "date": "2016-02-01",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-31-lima-caffeinated",
     "title": "Lima, caffeinated",
     "date": "2016-01-31",
-    "tags": ["trips"]
+    "tags": [
+      "trips"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-28-devops-automation",
     "title": "On DevOps automation",
     "date": "2016-01-28",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-26-css-comics",
     "title": "Intro",
     "date": "2016-01-26",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-26-how-to-stay-thin",
     "title": "Why are some people getting fat in the project?",
     "date": "2016-01-26",
-    "tags": ["CSScomics"]
+    "tags": [
+      "CSScomics"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-26-html-5-project",
     "title": "HTML5 project: CSS Comics",
     "date": "2016-01-26",
-    "tags": ["projects"]
+    "tags": [
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-15-cms-project",
     "title": "CMS Project:  Publishing platform/blog",
     "date": "2016-01-15",
-    "tags": ["ghost", "cms", "projects"]
+    "tags": [
+      "ghost",
+      "cms",
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-09-trip-to-south-america",
     "title": "Travel plans",
     "date": "2016-01-09",
-    "tags": ["trips"]
+    "tags": [
+      "trips"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-05-roadmap-2016",
     "title": "Roadmap 2016",
     "date": "2016-01-05",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-01-about-54chi",
     "title": "About 54chi",
     "date": "2016-01-01",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2016-01-01-specs",
     "title": "Specs",
     "date": "2016-01-01",
-    "tags": ["projectplan", "projects"]
+    "tags": [
+      "projectplan",
+      "projects"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   },
   {
     "slug": "2015-12-31-and-we-are-a-live",
     "title": "And...we are (a)live!",
     "date": "2015-12-31",
-    "tags": ["blog"]
+    "tags": [
+      "blog"
+    ],
+    "time": "12:00",
+    "timeGuessed": true
   }
 ]

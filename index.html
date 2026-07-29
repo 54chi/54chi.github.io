@@ -1,54 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>54chi</title>
+  <meta name="description" content="54chi — a micro blog you tune through like a TV.">
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="preload" href="assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/crt.css">
 </head>
-<body>
-  <header>
-    <h1><a href="index.html">54chi</a></h1>
-    <nav><a href="about.html">About</a></nav>
-  </header>
-  <main id="post-list">Loading…</main>
-  <footer>
-    <p><a href="index.html">54chi</a></p>
-  </footer>
-  <script>
-    fetch('posts.json')
-      .then(function(r) { return r.json(); })
-      .then(function(posts) {
-        var byYear = {};
-        for (var i = 0; i < posts.length; i++) {
-          var p = posts[i];
-          var year = p.date.slice(0, 4);
-          if (!byYear[year]) byYear[year] = [];
-          byYear[year].push(p);
-        }
+<body class="fx-on">
+  <div class="crt">
+    <div class="crt__frame">
+      <div class="crt__screen">
+        <canvas id="scene" aria-hidden="true"></canvas>
 
-        var years = Object.keys(byYear).sort(function(a, b) { return b - a; });
-        var html = '';
-        for (var j = 0; j < years.length; j++) {
-          var yr = years[j];
-          html += '<section class="year-section"><h2>' + yr + '</h2><ul>';
-          var entries = byYear[yr];
-          for (var k = 0; k < entries.length; k++) {
-            var entry = entries[k];
-            html += '<li>'
-              + '<span class="date">' + entry.date + '</span>'
-              + ' <a href="post.html?slug=' + entry.slug + '">' + entry.title + '</a>'
-              + '</li>';
-          }
-          html += '</ul></section>';
-        }
+        <div class="screen__scroll" id="scroll">
+          <article class="post" id="post">
+            <p class="notice">TUNING<span class="cursor"></span></p>
+          </article>
+        </div>
 
-        document.getElementById('post-list').innerHTML = html;
-      })
-      .catch(function() {
-        document.getElementById('post-list').textContent = 'Could not load posts.';
-      });
-  </script>
+        <div class="crt__vignette" aria-hidden="true"></div>
+        <div class="crt__overlay" aria-hidden="true"></div>
+        <canvas id="static" aria-hidden="true"></canvas>
+
+        <button class="edge edge--prev" id="edge-prev" type="button" title="Newer post (left arrow)" aria-label="Newer post">&lt;</button>
+        <button class="edge edge--next" id="edge-next" type="button" title="Older post (right arrow)" aria-label="Older post">&gt;</button>
+
+        <pre class="boot" id="boot" aria-hidden="true" hidden></pre>
+
+        <div class="help" id="help" hidden>
+          <div class="help__box">
+            <h2>CONTROLS</h2>
+            <dl>
+              <dt>&lt; &gt;</dt><dd>newer / older post</dd>
+              <dt>HOME END</dt><dd>latest / first post</dd>
+              <dt>D</dt><dd>sky: auto / day / night</dd>
+              <dt>C</dt><dd>CRT effects on / off</dd>
+              <dt>?</dt><dd>this panel</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <button class="btn" id="prev" type="button">&lt;&lt; PREV</button>
+      <div class="readout"><span id="readout">TUNING<span class="cursor"></span></span></div>
+      <button class="btn" id="next" type="button">NEXT &gt;&gt;</button>
+      <button class="btn" id="dn-toggle" type="button" title="Override day/night (D)">SKY:AUTO</button>
+      <button class="btn" id="fx-toggle" type="button" title="Toggle CRT effects (C)">CRT:ON</button>
+      <a class="btn" href="archive.html">INDEX</a>
+      <a class="btn" href="about.html">ABOUT</a>
+    </div>
+  </div>
+
+  <script src="assets/js/marked.min.js"></script>
+  <script src="assets/js/scene.js"></script>
+  <script src="assets/js/deck.js"></script>
 </body>
 </html>

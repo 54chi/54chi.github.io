@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Index | 54chi</title>
+  <meta name="description" content="Every post on 54chi, by year.">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="preload" href="assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/crt.css">
+</head>
+<body class="page fx-on">
+  <div class="crt">
+    <div class="crt__frame">
+      <div class="crt__screen">
+        <canvas id="scene" aria-hidden="true"></canvas>
+
+        <div class="screen__scroll">
+          <div class="sheet">
+            <nav class="sitenav">
+              <a href="index.html">&lt;&lt; DECK</a>
+              <a href="archive.html" aria-current="page">INDEX</a>
+              <a href="about.html">ABOUT</a>
+            </nav>
+
+            <h1>INDEX</h1>
+
+            <div class="filters">
+              <input class="field" id="q" type="search" placeholder="filter by title..." autocomplete="off">
+              <button class="btn" id="expand" type="button">EXPAND ALL</button>
+              <button class="btn" id="collapse" type="button">COLLAPSE</button>
+            </div>
+
+            <div class="tagbar" id="tagbar"></div>
+            <div id="list"><p class="notice">LOADING<span class="cursor"></span></p></div>
+          </div>
+        </div>
+
+        <div class="crt__vignette" aria-hidden="true"></div>
+        <div class="crt__overlay" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/scene.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    var listEl = document.getElementById('list');
+    var tagbarEl = document.getElementById('tagbar');
+    var qEl = document.getElementById('q');
+
+    var posts = [];
+    var activeTag = null;
+    /* Years the reader has explicitly toggled; everything else follows the
+       default of "newest year open, the rest closed". */
+    var openYears = {};
+
+    function isDay(post) {
+      var h = parseInt((post.time || '12:00').split(':')[0], 10);
+      return h >= 6 && h < 18;
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    function visible() {
+      var q = qEl.value.trim().toLowerCase();
+      return posts.filter(function (p) {
+        if (activeTag && (p.tags || []).indexOf(activeTag) < 0) return false;
+        if (q && p.title.toLowerCase().indexOf(q) < 0) return false;
+        return true;
+      });
+    }
+
+    function render() {
+      var shown = visible();
+
+      if (!shown.length) {
+        listEl.innerHTML = '<p class="notice">NO MATCHES</p>';
+        return;
+      }
+
+      var byYear = {};
+      var years = [];
+      shown.forEach(function (p) {
+        var y = p.date.slice(0, 4);
+        if (!byYear[y]) { byYear[y] = []; years.push(y); }
+        byYear[y].push(p);
+      });
+      years.sort(function (a, b) { return b - a; });
+
+      /* Filtering implies you want to see the hits, so open everything then. */
+      var filtering = !!qEl.value.trim() || !!activeTag;
+
+      var html = years.map(function (y, i) {
+        var open = filtering || (y in openYears ? openYears[y] : i === 0);
+        var rows = byYear[y].map(function (p) {
+          var tags = (p.tags || []).join(' ');
+          return '<li class="entry">' +
+            '<span class="entry__date">' + p.date.slice(5) + '</span>' +
+            '<span class="entry__lamp" data-day="' + (isDay(p) ? 1 : 0) + '" title="' +
+              (isDay(p) ? 'day' : 'night') + '">' + (isDay(p) ? '■' : '□') + '</span>' +
+            '<a href="index.html#' + encodeURIComponent(p.slug) + '">' + esc(p.title) + '</a>' +
+            (tags ? '<span class="entry__tags">' + esc(tags) + '</span>' : '') +
+            '</li>';
+        }).join('');
+
+        return '<section class="yr" data-year="' + y + '" aria-expanded="' + open + '">' +
+          '<button class="yr__head" type="button" data-year="' + y + '">' +
+            '<span>' + (open ? '-' : '+') + '</span><span>' + y + '</span>' +
+            '<span class="count">' + byYear[y].length + '</span>' +
+          '</button>' +
+          '<ul class="yr__list">' + rows + '</ul>' +
+          '</section>';
+      }).join('');
+
+      listEl.innerHTML = html;
+    }
+
+    function renderTags() {
+      var counts = {};
+      posts.forEach(function (p) {
+        (p.tags || []).forEach(function (t) { counts[t] = (counts[t] || 0) + 1; });
+      });
+
+      var names = Object.keys(counts).sort(function (a, b) {
+        return counts[b] - counts[a] || a.localeCompare(b);
+      });
+
+      tagbarEl.innerHTML = names.map(function (t) {
+        return '<button class="tag" type="button" data-tag="' + esc(t) + '" aria-pressed="' +
+          (activeTag === t) + '">' + esc(t) + ' ' + counts[t] + '</button>';
+      }).join('');
+    }
+
+    /* ---- events ---- */
+
+    listEl.addEventListener('click', function (e) {
+      var head = e.target.closest('.yr__head');
+      if (!head) return;
+      var y = head.getAttribute('data-year');
+      var section = head.parentNode;
+      openYears[y] = section.getAttribute('aria-expanded') !== 'true';
+      render();
+    });
+
+    tagbarEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.tag');
+      if (!btn) return;
+      var t = btn.getAttribute('data-tag');
+      activeTag = activeTag === t ? null : t;
+      renderTags();
+      render();
+    });
+
+    qEl.addEventListener('input', render);
+
+    document.getElementById('expand').addEventListener('click', function () {
+      posts.forEach(function (p) { openYears[p.date.slice(0, 4)] = true; });
+      render();
+    });
+
+    document.getElementById('collapse').addEventListener('click', function () {
+      posts.forEach(function (p) { openYears[p.date.slice(0, 4)] = false; });
+      render();
+    });
+
+    /* ---- start ---- */
+
+    var canvas = document.getElementById('scene');
+    var now = new Date();
+    var today = now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0');
+    var clock = String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0');
+
+    function paint() {
+      /* The index shows the sky as it is right now, not as any post was. */
+      window.PixelScene.render(canvas, { date: today, time: clock, slug: 'index' });
+    }
+
+    paint();
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(paint, 150);
+    });
+
+    try {
+      if (localStorage.getItem('54chi.fx') === 'off') document.body.classList.remove('fx-on');
+    } catch (e) { /* private mode */ }
+
+    fetch('posts.json')
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        posts = list.slice().sort(function (a, b) {
+          var ka = a.date + ' ' + (a.time || '12:00');
+          var kb = b.date + ' ' + (b.time || '12:00');
+          return ka < kb ? 1 : ka > kb ? -1 : 0;
+        });
+        renderTags();
+        render();
+      })
+      .catch(function () {
+        listEl.innerHTML = '<p class="notice">NO SIGNAL<br>could not load posts.json</p>';
+      });
+  })();
+  </script>
+</body>
+</html>

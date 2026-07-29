@@ -1,38 +1,96 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>About | 54chi</title>
-        <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="stylesheet" href="assets/css/site.css" />
-    </head>
-    <body>
-        <header>
-            <h1><a href="index.html">54chi</a></h1>
-            <nav><a href="about.html">About</a></nav>
-        </header>
-        <main>
-            <article>
-                <h1>About</h1>
-                <p>Welcome to year I DON'T CARE ANYMORE of this github blog.</p>
-                <p>
-                    54chi is addicted to coffee shops, and decent internet
-                    speed. He is not a professional blogger, and like in the
-                    previous year, this site is going to remain lame and never
-                    going to be promoted. So if you found me, thank you for
-                    taking the time to read this page.
-                </p>
-                <p>
-                    The opinions expressed in this site are mine and mine alone.
-                    They do not reflect the opinions of my employers (past or
-                    present), co-workers, family, pets, or possibly even me if
-                    the post you&rsquo;re reading is more than a few days old.
-                </p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | 54chi</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="preload" href="assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/crt.css">
+</head>
+<body class="page fx-on">
+  <div class="crt">
+    <div class="crt__frame">
+      <div class="crt__screen">
+        <canvas id="scene" aria-hidden="true"></canvas>
+
+        <div class="screen__scroll">
+          <div class="sheet">
+            <nav class="sitenav">
+              <a href="index.html">&lt;&lt; DECK</a>
+              <a href="archive.html">INDEX</a>
+              <a href="about.html" aria-current="page">ABOUT</a>
+            </nav>
+
+            <h1>ABOUT</h1>
+
+            <article class="post" style="padding:0;background:none;box-shadow:none;max-width:none">
+              <p>Welcome to year I DON'T CARE ANYMORE of this github blog.</p>
+              <p>
+                54chi is addicted to coffee shops, and decent internet speed. He is
+                not a professional blogger, and like in the previous year, this site
+                is going to remain lame and never going to be promoted. So if you
+                found me, thank you for taking the time to read this page.
+              </p>
+              <p>
+                The opinions expressed in this site are mine and mine alone. They do
+                not reflect the opinions of my employers (past or present),
+                co-workers, family, pets, or possibly even me if the post you&rsquo;re
+                reading is more than a few days old.
+              </p>
+
+              <hr>
+
+              <h2>How this thing works</h2>
+              <p>
+                Posts are plain markdown files in <code>posts/</code>, indexed by
+                <code>posts.json</code>. No build step, no generator.
+              </p>
+              <p>
+                The sky behind each post is generated from the day of the week it was
+                posted (seven palettes) and whether it went up in daylight
+                (<code>06:00</code>&ndash;<code>17:59</code>) or after dark. The horizon,
+                clouds and stars are seeded from the post&rsquo;s slug, so every post keeps
+                the same sky forever. Press <code>D</code> to override it, <code>C</code>
+                to switch the CRT effects off, <code>?</code> for the rest.
+              </p>
             </article>
-        </main>
-        <footer>
-            <p><a href="index.html">54chi</a></p>
-        </footer>
-    </body>
+          </div>
+        </div>
+
+        <div class="crt__vignette" aria-hidden="true"></div>
+        <div class="crt__overlay" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/scene.js"></script>
+  <script>
+    (function () {
+      var canvas = document.getElementById('scene');
+      var now = new Date();
+      var today = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+      var clock = String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0');
+
+      function paint() {
+        window.PixelScene.render(canvas, { date: today, time: clock, slug: 'about' });
+      }
+
+      paint();
+
+      var t = null;
+      window.addEventListener('resize', function () {
+        clearTimeout(t);
+        t = setTimeout(paint, 150);
+      });
+
+      try {
+        if (localStorage.getItem('54chi.fx') === 'off') document.body.classList.remove('fx-on');
+      } catch (e) { /* private mode */ }
+    })();
+  </script>
+</body>
 </html>

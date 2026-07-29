@@ -1,0 +1,600 @@
+/* ============================================================================
+   54chi — pixel CRT
+   ----------------------------------------------------------------------------
+   House rules, so this stays pixel art rather than "retro-ish gradients":
+
+     - no blur radius on any shadow, ever
+     - gradients only with hard colour stops on whole-pixel boundaries
+     - no border-radius; corners are stepped by hand where they need shaping
+     - no transforms that resample (scale/rotate/skew on rendered content)
+     - every size is a multiple of --u (11px, Departure Mono's design grid)
+
+   Barrel distortion is deliberately absent: the only ways to curve a CRT face
+   in CSS resample the layer and soften every edge, which is the one thing the
+   whole design is trying to avoid. Curvature is implied by the stepped bezel
+   corners and the dithered vignette instead.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Departure Mono";
+  src: url("../fonts/DepartureMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --u: 11px;              /* base grid = font design size */
+
+  --case:        #b8b0a0; /* bezel plastic */
+  --case-light:  #d6cfc0;
+  --case-dark:   #7d766a;
+  --case-darker: #4a453e;
+
+  --ink:      #d8f0d0;
+  --ink-dim:  #7fa87c;
+  --ink-hot:  #ffffff;
+  --amber:    #ffc76b;
+  --screen-bg:#0a0f0a;
+
+  --panel:    #1c2420;
+  --panel-hi: #2e3a33;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Departure Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  font-size: var(--u);
+  line-height: 2;
+  color: var(--ink);
+  background: #17140f;
+  /* keep bitmap glyphs crisp where the engine lets us say so */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+  text-rendering: optimizeSpeed;
+  overflow: hidden;
+}
+
+/* The room the TV sits in: flat colour plus a coarse dither, no gradient. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #17140f;
+  background-image:
+    linear-gradient(45deg, #1e1a14 25%, transparent 25%, transparent 75%, #1e1a14 75%),
+    linear-gradient(45deg, #1e1a14 25%, transparent 25%, transparent 75%, #1e1a14 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+/* ── The set ─────────────────────────────────────────────────────────────── */
+
+.crt {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--u) * 1.5);
+  gap: calc(var(--u) * 0.75);
+}
+
+/* Stepped "rounded" corners, built from hard-edged shadows only. */
+.crt__frame {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: var(--case);
+  padding: calc(var(--u) * 1.25);
+  box-shadow:
+    0 -4px 0 0 var(--case),  0 4px 0 0 var(--case),
+    -4px 0 0 0 var(--case),  4px 0 0 0 var(--case),
+    0 -8px 0 0 var(--case-dark), 0 8px 0 0 var(--case-darker),
+    -8px 0 0 0 var(--case-dark), 8px 0 0 0 var(--case-dark),
+    inset 4px 4px 0 0 var(--case-light),
+    inset -4px -4px 0 0 var(--case-dark);
+}
+
+.crt__screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: var(--screen-bg);
+  box-shadow:
+    inset 4px 4px 0 0 #05070500,
+    inset 0 0 0 4px var(--case-darker);
+}
+
+#scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  z-index: 0;
+}
+
+/* ── Overlays: scanlines, mask, vignette ─────────────────────────────────── */
+
+.crt__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Hard 2px scanlines. No soft stops — every boundary is on a whole pixel. */
+.fx-on .crt__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.28) 0px,
+    rgba(0, 0, 0, 0.28) 2px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  background-size: 100% 4px;
+}
+
+/* Aperture-grille tint: three hard vertical bars, RGB order. */
+.fx-on .crt__overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.10;
+  background-image: linear-gradient(
+    to right,
+    #ff0000 0px, #ff0000 2px,
+    #00ff00 2px, #00ff00 4px,
+    #0000ff 4px, #0000ff 6px
+  );
+  background-size: 6px 100%;
+  mix-blend-mode: screen;
+}
+
+/* Dithered corner darkening — a checker mask, not a radial gradient. */
+.crt__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.fx-on .crt__vignette {
+  opacity: 1;
+  background-image:
+    linear-gradient(45deg, rgba(0,0,0,0.5) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.5) 75%),
+    linear-gradient(45deg, rgba(0,0,0,0.5) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.5) 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+  -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, transparent 40%, #000 100%);
+  mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, transparent 40%, #000 100%);
+}
+
+/* Slow luminance drift. Opacity only — nothing moves, nothing resamples. */
+.fx-on .crt__screen { animation: flicker 5.5s steps(12, end) infinite; }
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  47%      { opacity: 0.985; }
+  49%      { opacity: 1; }
+  92%      { opacity: 0.975; }
+}
+
+/* Channel-change static, drawn by deck.js into its own canvas. */
+#static {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  image-rendering: pixelated;
+  display: none;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.is-switching #static { display: block; }
+
+/* ── Readable content plate ──────────────────────────────────────────────── */
+
+.screen__scroll {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: calc(var(--u) * 2) calc(var(--u) * 1.5) calc(var(--u) * 6);
+  scrollbar-width: none;
+}
+
+.screen__scroll::-webkit-scrollbar { width: 0; height: 0; }
+
+/*
+ * The post sits on a flat translucent slab. Pixel art skies are busy, and
+ * body copy over raw dithering is unreadable no matter how pretty it looks.
+ */
+.post {
+  max-width: calc(var(--u) * 62);
+  margin: 0 auto;
+  padding: calc(var(--u) * 2);
+  background: rgba(6, 12, 8, 0.82);
+  box-shadow:
+    inset 2px 2px 0 0 rgba(216, 240, 208, 0.14),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(0, 0, 0, 0.55);
+}
+
+.post__meta {
+  font-size: var(--u);
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+  margin-bottom: var(--u);
+  text-transform: uppercase;
+}
+
+.post__meta .sep { opacity: 0.4; padding: 0 0.5ch; }
+
+.post h1 {
+  font-size: calc(var(--u) * 2);
+  line-height: 1.35;
+  color: var(--ink-hot);
+  margin-bottom: calc(var(--u) * 1.5);
+  letter-spacing: -0.02em;
+}
+
+.post h2 { font-size: calc(var(--u) * 1.5); color: var(--amber); margin: calc(var(--u) * 2) 0 var(--u); }
+.post h3 { font-size: calc(var(--u) * 1.5); color: var(--ink-hot); margin: calc(var(--u) * 2) 0 var(--u); }
+.post h4, .post h5, .post h6 { font-size: var(--u); color: var(--ink-hot); margin: calc(var(--u) * 1.5) 0 var(--u); }
+
+.post p { font-size: var(--u); margin-bottom: calc(var(--u) * 1.5); }
+.post ul, .post ol { margin: 0 0 calc(var(--u) * 1.5) calc(var(--u) * 2); font-size: var(--u); }
+.post li { margin-bottom: calc(var(--u) * 0.5); }
+
+.post a { color: var(--amber); text-decoration: none; border-bottom: 2px solid rgba(255, 199, 107, 0.35); }
+.post a:hover { color: var(--ink-hot); border-bottom-color: var(--ink-hot); background: rgba(255, 199, 107, 0.15); }
+
+.post blockquote {
+  border-left: 4px solid var(--ink-dim);
+  padding: 0 0 0 calc(var(--u) * 1.5);
+  margin: calc(var(--u) * 1.5) 0;
+  color: var(--ink-dim);
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: calc(var(--u) * 1.5) 0;
+  image-rendering: pixelated;
+  box-shadow: 0 0 0 2px var(--ink-dim);
+}
+
+.post pre {
+  background: #050a06;
+  border: 2px solid #2c3a2e;
+  padding: var(--u);
+  overflow-x: auto;
+  margin-bottom: calc(var(--u) * 1.5);
+  font-size: var(--u);
+  line-height: 1.6;
+}
+
+.post code { font-family: inherit; font-size: inherit; }
+.post :not(pre) > code {
+  background: #0d1810;
+  color: var(--amber);
+  padding: 0 0.4ch;
+  box-shadow: 0 0 0 2px #24301f;
+}
+
+.post hr { border: none; border-top: 2px solid var(--ink-dim); margin: calc(var(--u) * 2) 0; opacity: 0.4; }
+
+.post table { width: 100%; border-collapse: collapse; margin-bottom: calc(var(--u) * 1.5); font-size: var(--u); }
+.post th, .post td { border: 2px solid #2c3a2e; padding: calc(var(--u) * 0.5); text-align: left; }
+.post th { color: var(--amber); }
+
+/* End-of-post marker */
+.post__end {
+  margin-top: calc(var(--u) * 2);
+  color: var(--ink-dim);
+  font-size: var(--u);
+  letter-spacing: 0.3em;
+}
+
+/* ── Bottom control panel ────────────────────────────────────────────────── */
+
+.panel {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  background: var(--case);
+  padding: 4px;
+  box-shadow:
+    inset 4px 4px 0 0 var(--case-light),
+    inset -4px -4px 0 0 var(--case-dark),
+    0 4px 0 0 var(--case-darker);
+}
+
+.btn {
+  font: inherit;
+  font-size: var(--u);
+  color: var(--ink);
+  background: var(--panel);
+  border: 0;
+  padding: calc(var(--u) * 0.5) var(--u);
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  box-shadow:
+    inset 2px 2px 0 0 var(--panel-hi),
+    inset -2px -2px 0 0 #0b100d;
+}
+
+.btn:hover:not(:disabled) { color: var(--ink-hot); background: #26332b; }
+
+.btn:active:not(:disabled),
+.btn[aria-pressed="true"] {
+  color: var(--amber);
+  box-shadow:
+    inset 2px 2px 0 0 #0b100d,
+    inset -2px -2px 0 0 var(--panel-hi);
+}
+
+.btn:disabled { color: #4a5a4c; cursor: default; }
+
+.btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+/*
+ * Tape counter readout. The inner span matters: if the text sits directly in
+ * the flex box, every inline child (<b>, .sep) is blockified into its own flex
+ * item and the whitespace between them collapses into visible gaps.
+ */
+.readout {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a1410;
+  color: var(--ink-dim);
+  font-size: var(--u);
+  letter-spacing: 0.12em;
+  padding: 0 var(--u);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px #050907;
+}
+
+.readout > span { white-space: nowrap; }
+
+.readout b { color: var(--amber); font-weight: 400; }
+.readout .lamp { color: var(--ink-hot); }
+
+/* Nav arrows on the screen itself */
+.edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(var(--u) * 4);
+  z-index: 5;
+  border: 0;
+  background: transparent;
+  color: var(--ink-hot);
+  font: inherit;
+  font-size: calc(var(--u) * 2);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms steps(3, end);
+}
+
+.edge--prev { left: 0; }
+.edge--next { right: 0; }
+.edge:hover:not(:disabled) { opacity: 1; background: rgba(0, 0, 0, 0.45); }
+.edge:focus-visible { opacity: 1; outline: 2px solid var(--amber); outline-offset: -4px; }
+.edge:disabled { cursor: default; }
+
+/* ── Boot sequence ───────────────────────────────────────────────────────── */
+
+.boot {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--screen-bg);
+  color: var(--ink);
+  padding: calc(var(--u) * 2);
+  font-size: var(--u);
+  line-height: 2;
+  white-space: pre-wrap;
+}
+
+.boot[hidden] { display: none; }
+
+/* U+2589 — in Departure Mono's box-drawing set, so it never falls back. */
+.cursor::after {
+  content: "\2589";
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+/* ── Help overlay ────────────────────────────────────────────────────────── */
+
+.help {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 8, 5, 0.9);
+}
+
+.help[hidden] { display: none; }
+
+.help__box {
+  background: var(--panel);
+  padding: calc(var(--u) * 2);
+  font-size: var(--u);
+  box-shadow:
+    inset 2px 2px 0 0 var(--panel-hi),
+    inset -2px -2px 0 0 #0b100d,
+    0 0 0 4px var(--case-darker);
+}
+
+.help__box h2 { color: var(--amber); margin-bottom: var(--u); font-size: var(--u); letter-spacing: 0.2em; }
+.help__box dl { display: grid; grid-template-columns: auto 1fr; gap: 0 calc(var(--u) * 2); }
+.help__box dt { color: var(--ink-hot); }
+.help__box dd { color: var(--ink-dim); }
+
+/* ── Status / error states ───────────────────────────────────────────────── */
+
+.notice { color: var(--amber); font-size: var(--u); text-align: center; padding: calc(var(--u) * 4) var(--u); }
+
+/* ── Archive / about pages ───────────────────────────────────────────────── */
+
+/*
+ * These reuse the deck's layout exactly — the screen is the scroll container,
+ * not the body. Letting the body scroll instead put the content in normal flow
+ * below the absolutely-positioned canvas in paint order, which hid it entirely.
+ * Unlike the deck, they do show a scrollbar: a long list with no scroll
+ * affordance and no arrow keys to press is just a dead end.
+ */
+.page .screen__scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-dim) transparent;
+}
+
+.page .screen__scroll::-webkit-scrollbar { width: 12px; height: 12px; }
+.page .screen__scroll::-webkit-scrollbar-track { background: #0a1410; }
+.page .screen__scroll::-webkit-scrollbar-thumb {
+  background: var(--ink-dim);
+  border: 2px solid #0a1410;
+}
+.page .screen__scroll::-webkit-scrollbar-thumb:hover { background: var(--ink); }
+
+.sheet {
+  max-width: calc(var(--u) * 68);
+  margin: 0 auto;
+  padding: calc(var(--u) * 2);
+  background: rgba(6, 12, 8, 0.86);
+  box-shadow:
+    inset 2px 2px 0 0 rgba(216, 240, 208, 0.14),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.sheet h1 {
+  font-size: calc(var(--u) * 2);
+  color: var(--ink-hot);
+  margin-bottom: var(--u);
+  letter-spacing: 0.05em;
+}
+
+.filters { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: calc(var(--u) * 2); align-items: stretch; }
+
+.field {
+  font: inherit;
+  font-size: var(--u);
+  color: var(--ink);
+  background: #0a1410;
+  border: 0;
+  padding: calc(var(--u) * 0.5) var(--u);
+  flex: 1 1 calc(var(--u) * 18);
+  min-width: calc(var(--u) * 14);
+  box-shadow: inset 0 0 0 2px #24301f;
+}
+
+.field::placeholder { color: #4a5a4c; }
+.field:focus { outline: 2px solid var(--amber); outline-offset: 0; }
+
+.tagbar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: calc(var(--u) * 2); }
+
+.tag {
+  font: inherit;
+  font-size: var(--u);
+  color: var(--ink-dim);
+  background: var(--panel);
+  border: 0;
+  padding: 0 calc(var(--u) * 0.75);
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0 0 var(--panel-hi), inset -2px -2px 0 0 #0b100d;
+}
+
+.tag:hover { color: var(--ink-hot); }
+.tag[aria-pressed="true"] {
+  color: var(--amber);
+  box-shadow: inset 2px 2px 0 0 #0b100d, inset -2px -2px 0 0 var(--panel-hi);
+}
+
+.yr { margin-bottom: var(--u); }
+.yr[aria-expanded="true"] { margin-bottom: calc(var(--u) * 2); }
+
+.yr__head {
+  font: inherit;
+  font-size: var(--u);
+  width: 100%;
+  text-align: left;
+  color: var(--amber);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #24301f;
+  padding: calc(var(--u) * 0.5) 0;
+  cursor: pointer;
+  letter-spacing: 0.2em;
+  display: flex;
+  gap: 1ch;
+  align-items: baseline;
+}
+
+.yr__head:hover { color: var(--ink-hot); }
+.yr__head .count { color: var(--ink-dim); letter-spacing: 0; margin-left: auto; }
+.yr__list { list-style: none; }
+.yr[aria-expanded="false"] .yr__list { display: none; }
+
+.entry { display: flex; gap: 1.5ch; align-items: baseline; padding: 2px 0; font-size: var(--u); }
+.entry__date { color: var(--ink-dim); white-space: nowrap; }
+.entry__lamp { width: 1ch; text-align: center; }
+.entry__lamp[data-day="1"] { color: var(--amber); }
+.entry__lamp[data-day="0"] { color: #6d8fc4; }
+.entry a { color: var(--ink); text-decoration: none; }
+.entry a:hover { color: var(--ink-hot); background: rgba(255, 199, 107, 0.2); }
+.entry__tags { color: #4a5a4c; margin-left: auto; white-space: nowrap; }
+
+.sitenav { display: flex; gap: 1.5ch; margin-bottom: calc(var(--u) * 2); font-size: var(--u); }
+.sitenav a { color: var(--ink-dim); text-decoration: none; }
+.sitenav a:hover, .sitenav a[aria-current="page"] { color: var(--amber); }
+
+/* ── Motion and small screens ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-on .crt__screen { animation: none; }
+  .cursor::after { animation: none; }
+  .edge { transition: none; }
+  #static { display: none !important; }
+}
+
+@media (max-width: 700px) {
+  :root { --u: 10px; }
+  .crt { padding: 4px; }
+  .crt__frame { padding: 6px; }
+  .screen__scroll { padding: var(--u) calc(var(--u) * 0.5) calc(var(--u) * 6); }
+  .post { padding: var(--u); }
+  .panel { flex-wrap: wrap; }
+  .readout { order: -1; flex-basis: 100%; }
+  .btn { flex: 1 1 auto; }
+  /* Swipe and the panel buttons both cover navigation here, and the arrows
+     sit right on top of the body copy at this width. */
+  .edge { display: none; }
+  .fx-on .crt__overlay::after { display: none; }
+}
+
+/* Coarse pointers never get hover, so the arrows would otherwise stay invisible. */
+@media (hover: none) {
+  .edge { opacity: 0.45; }
+}
