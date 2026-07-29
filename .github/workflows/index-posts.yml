@@ -1,0 +1,64 @@
+name: Index posts
+
+# posts.json is generated from the posts' front matter, not hand-maintained.
+# A pull request merged into master arrives here as a push to master, so this
+# one trigger covers merges and direct edits on github.com alike.
+on:
+  push:
+    branches: [master]
+    # posts.json is deliberately absent from this list: the commit this
+    # workflow pushes back only touches that file, so it cannot retrigger.
+    paths:
+      - 'posts/**'
+      - 'tools/index_posts.py'
+      - '.github/workflows/index-posts.yml'
+  pull_request:
+    paths:
+      - 'posts/**'
+      - 'tools/index_posts.py'
+  workflow_dispatch:
+
+concurrency:
+  group: index-posts-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # On a PR, only report. Committing to a contributor's branch is rude and the
+  # push job will regenerate on merge anyway.
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # index_posts.py reads the commit that added each post to fill in a
+          # missing time. A shallow clone has no such commit and the script
+          # would quietly fall back to 12:00 for everything.
+          fetch-depth: 0
+      - name: Check posts.json is current
+        run: python3 tools/index_posts.py --check
+
+  update:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Regenerate posts.json
+        run: python3 tools/index_posts.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- posts.json; then
+            echo "posts.json already current, nothing to commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts.json
+          git commit -m "Regenerate posts.json from front matter"
+          git push

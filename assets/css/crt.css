@@ -365,7 +365,19 @@ body::before {
   box-shadow: inset 0 0 0 2px #050907;
 }
 
-.readout > span { white-space: nowrap; }
+/*
+ * Truncate from the right rather than letting a centred nowrap line get
+ * clipped at both ends — losing "CH 0" off the front reads as a glitch, a
+ * trailing ellipsis reads as intentional.
+ */
+.readout > span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .readout b { color: var(--amber); font-weight: 400; }
 .readout .lamp { color: var(--ink-hot); }
@@ -562,6 +574,17 @@ body::before {
 .sitenav { display: flex; gap: 1.5ch; margin-bottom: calc(var(--u) * 2); font-size: var(--u); }
 .sitenav a { color: var(--ink-dim); text-decoration: none; }
 .sitenav a:hover, .sitenav a[aria-current="page"] { color: var(--amber); }
+
+/*
+ * Give the readout its own row before it has to truncate. The panel needs
+ * roughly 1280px to fit the counter, date, weekday, time and both toggles on
+ * one line at --u: 16px.
+ */
+@media (max-width: 1280px) {
+  .panel { flex-wrap: wrap; }
+  .readout { order: -1; flex-basis: 100%; padding: calc(var(--u) * 0.25) var(--u); }
+  .btn { flex: 1 1 auto; }
+}
 
 /* ── Motion and small screens ────────────────────────────────────────────── */
 

@@ -43,8 +43,10 @@
 
               <h2>How this thing works</h2>
               <p>
-                Posts are plain markdown files in <code>posts/</code>, indexed by
-                <code>posts.json</code>. No build step, no generator.
+                Posts are plain markdown files in <code>posts/</code>. A GitHub
+                Action reads their front matter and regenerates
+                <code>posts.json</code>, which is the only file this site loads to
+                build the index. No build step, no generator.
               </p>
               <p>
                 The sky behind each post is generated from the day of the week it was

@@ -1,6 +1,7 @@
 ---
 title: "Here we go again again (now with more AI)"
 date: 2026-06-08
+time: "18:46"
 tags: [rant]
 ---
 
