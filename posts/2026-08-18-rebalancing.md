@@ -19,3 +19,5 @@ So, thanks to a recent announcement from the company, I'll be slowing down in li
 Anyways, don't expect me to become a farmer (yet), but when it comes to "crafting", I've always supported the [Software Craftsmanship Manifesto ](https://manifesto.softwarecraftsmanship.org/) , though now that we are surrounded with AI-something everywhere, I plan to check "revised" versions [here](https://ai-manifesto.software-craftsmanship.dev/principles), and [here](https://ericsilva.org/posts/ai-manifesto/), among others before trying to follow them. 
 
 I'll be setting a soft schedule for a few of the projects I have in mind. With the help of AI, YouTube and some luck this may work well. 
+
+54chi

@@ -9,6 +9,8 @@
 .ruby-gemset
 .ruby-version
 .sass-cache
+.obsidian/
+.obsidian/*
 /test/source/file_name.txt
 /vendor
 Gemfile.lock

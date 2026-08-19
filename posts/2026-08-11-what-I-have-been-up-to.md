@@ -2,10 +2,10 @@
 title: "What have I been up to?"
 date: 2026-08-11
 time: 16:26
-tags: [blog,routine]
+tags: [rant,routine]
 ---
 
-I think I am going to treat this as my way to keep you informed of my life. For the more "pro" BS, go to [Apples and Oranges](54chi.com) where I plan to compare the different LLMs with my existencial work related questions lol.
+I think I am going to treat this as my way to keep you informed of my life. For the more "pro" BS, go to [Apples and Oranges](https://54chi.com) where I plan to compare the different LLMs with my existencial work related questions lol.
 
 ### TL;DR:
 
