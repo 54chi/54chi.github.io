@@ -3,28 +3,38 @@
     "slug": "2026-08-18-rebalancing",
     "title": "Rebalancing",
     "date": "2026-08-18",
-    "time": "17:30",
-    "tags": ["rant", "slow-life"]
+    "tags": [
+      "slow-life",
+      "rant"
+    ],
+    "time": "17:30"
   },
   {
     "slug": "2026-08-11-what-I-have-been-up-to",
     "title": "What have I been up to?",
     "date": "2026-08-11",
-    "time": "16:26",
-    "tags": ["rant"]
+    "tags": [
+      "blog",
+      "routine"
+    ],
+    "time": "16:26"
   },
   {
     "slug": "2026-08-06-and-here-we-go-again-again",
     "title": "Here we go again again (now with more AI)",
     "date": "2026-08-06",
-    "tags": ["rant"],
+    "tags": [
+      "rant"
+    ],
     "time": "18:46"
   },
   {
     "slug": "2026-05-23-welp",
     "title": "And...we are still alive",
     "date": "2026-05-23",
-    "tags": ["rant"],
+    "tags": [
+      "rant"
+    ],
     "time": "11:07"
   }
 ]

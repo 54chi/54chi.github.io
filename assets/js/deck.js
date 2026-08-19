@@ -14,6 +14,57 @@
   var LAMP_DAY = '■';   /* ■ */
   var LAMP_NIGHT = '□'; /* □ */
 
+  /* Obsidian drops pasted attachments here. */
+  var IMAGE_BASE = 'images/';
+
+  /*
+   * Obsidian writes image embeds as ![[file.png]], optionally ![[file.png|x]]
+   * where x is either alt text or a pixel width. Plain markdown has no such
+   * syntax, so without this the raw ![[...]] shows up as prose in the post.
+   *
+   * Registered as a marked inline extension rather than a regex pass over the
+   * raw markdown: marked hands tokenizers only the spans it has already
+   * classified as inline content, so an embed inside a fenced code block is
+   * left alone for free. A pre-parse String.replace would rewrite it.
+   */
+  window.marked.use({
+    extensions: [{
+      name: 'obsidianEmbed',
+      level: 'inline',
+      start: function (src) {
+        var i = src.indexOf('![[');
+        return i < 0 ? undefined : i;
+      },
+      tokenizer: function (src) {
+        var m = /^!\[\[([^\]|]+?)(?:\|([^\]]*))?\]\]/.exec(src);
+        if (!m) return undefined;
+        return {
+          type: 'obsidianEmbed',
+          raw: m[0],
+          file: m[1].trim(),
+          arg: (m[2] || '').trim()
+        };
+      },
+      renderer: function (token) {
+        /* Filenames routinely contain spaces, so the path must be encoded. */
+        var src = IMAGE_BASE + encodeURIComponent(token.file);
+        var size = /^(\d+)(?:x(\d+))?$/.exec(token.arg);
+        var dims = '';
+        var alt = token.arg;
+
+        if (size) {
+          /* Obsidian overloads `|` for both alt text and a pixel width. */
+          dims = ' width="' + size[1] + '"' + (size[2] ? ' height="' + size[2] + '"' : '');
+          alt = '';
+        }
+
+        return '<img src="' + escapeHtml(src) + '"' +
+               ' alt="' + escapeHtml(alt || token.file) + '"' + dims +
+               ' loading="lazy" decoding="async">';
+      }
+    }]
+  });
+
   var els = {
     scene: document.getElementById('scene'),
     static: document.getElementById('static'),
@@ -38,8 +89,14 @@
   var twinkleTimer = null;
 
   /* User overrides, persisted. dayNight: 'auto' | 'day' | 'night' */
+  /*
+   * CRT defaults off: the scanlines and vignette both paint on top of the
+   * post text. Only those layers (plus the flicker) follow this toggle --
+   * the boot sequence and the channel-change static are the tuning feel
+   * rather than something sitting on the words, so they always run.
+   */
   var prefs = {
-    fx: read('54chi.fx', 'on'),
+    fx: read('54chi.fx', 'off'),
     dayNight: read('54chi.dn', 'auto')
   };
 
@@ -125,8 +182,7 @@
   /* ---- channel-change static --------------------------------------------- */
 
   function burstStatic(swap) {
-    if (prefs.fx !== 'on' ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       swap();
       return;
     }
@@ -263,7 +319,7 @@
     try { seen = sessionStorage.getItem('54chi.booted') === '1'; } catch (e) {}
 
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (seen || reduced || prefs.fx !== 'on') {
+    if (seen || reduced) {
       els.boot.hidden = true;
       then();
       return;
