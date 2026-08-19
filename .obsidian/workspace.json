@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "d5e89eccf9dd6404",
+    "type": "split",
+    "children": [
+      {
+        "id": "4fd88dc84065fa84",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8ae489ff24dd0a17",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/2026-08-11-what-I-have-been-up-to.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-08-11-what-I-have-been-up-to"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b047697b26dae8a6",
+    "type": "split",
+    "children": [
+      {
+        "id": "52bc5e9f6ea630d0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4c478bdd1ed25aa",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "35619a3421dd35b2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f4b25287607ca872",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2e0f0e9351250e77",
+    "type": "split",
+    "children": [
+      {
+        "id": "53a283632d1bab62",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4f183eb8a96d2802",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "posts/2026-08-11-what-I-have-been-up-to.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "e583452cc6dedabf",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "posts/2026-08-11-what-I-have-been-up-to.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "a178c461266d510a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "27dea4e5633c5d09",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3d95fc705cf30f64",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "posts/2026-08-11-what-I-have-been-up-to.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "8ae489ff24dd0a17",
+  "lastOpenFiles": [
+    "posts/2026-08-18-rebalancing.md",
+    "posts/2026-08-11-what-I-have-been-up-to.md",
+    "images/Pasted image 20260818212333.png",
+    "images",
+    "Pasted image 20260818211533.png",
+    "README.md",
+    "posts/2026-05-23-welp.md",
+    "posts/2026-08-06-and-here-we-go-again-again.md"
+  ]
+}
