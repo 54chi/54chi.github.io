@@ -30,6 +30,25 @@ hour — the site marks coarse times with a `~` instead of implying a precision
 you never claimed. Leave it out and the commit that added the file is used;
 failing that it defaults to `12:00`.
 
+## Images
+
+Paste into Obsidian as usual and reference it with the normal embed syntax:
+
+```
+![[Pasted image 20260818212333.jpg]]
+![[diagram.png|An alt description]]
+![[diagram.png|400]]              <- a bare number is a pixel width
+```
+
+The site resolves these against `images/`, so **set Obsidian's attachment
+folder to `images/`** (Settings -> Files and links -> Default location for new
+attachments). Out of the box Obsidian drops attachments in the vault root and
+they won't resolve.
+
+Photos are worth resizing before committing -- a phone/camera paste can be
+10+ MB, and the deck prefetches neighbouring posts, so it costs visitors who
+never open that post. ~1600px wide as JPEG is plenty for the column width.
+
 ## posts.json
 
 Generated from the above — don't edit it by hand, your changes will be

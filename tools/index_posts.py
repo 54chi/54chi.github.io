@@ -8,9 +8,11 @@ PixelScene.render). It used to be maintained by hand, which drifted: one post
 was listed under a date that disagreed with its own front matter, making "the
 latest post" -- what the landing page opens on -- ambiguous.
 
-Front matter is now the source of truth and this file is derived. It is fully
+Front matter is the source of truth and this file is derived. It is fully
 reproducible: delete posts.json, re-run, get the same bytes back. Nothing here
 reads the previous contents.
+
+Only posts/ is indexed. oldPosts/ is deliberately out of scope.
 
 Usage:
     python3 tools/index_posts.py            # rewrite posts.json
@@ -36,14 +38,6 @@ KEYWORD_TIMES = {"day": "12:00", "night": "21:00"}
 
 DEFAULT_TIME = "12:00"
 
-# The Jekyll migration added 37 posts in one commit, so git reports every one
-# of them as created 2026-06-08T18:46 -- that is when the files were moved, not
-# when they were written. Trusting it would give 37 posts a confident-looking
-# evening timestamp and flip them all to night skies. Posts added by this
-# commit fall through to the default instead, until real times are backfilled
-# into their front matter. Once that is done this guard is dead code.
-MIGRATION_COMMIT = "33dc6e4ed0e0565e184e48a9208e389a18c4216e"
-
 FM_PATTERN = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n", re.DOTALL)
 TIME_PATTERN = re.compile(r"\A([01]\d|2[0-3]):([0-5]\d)\Z")
 
@@ -54,25 +48,53 @@ class PostError(Exception):
 
 def parse_front_matter(text, filename):
     """
-    Pull the front matter block into a dict of raw string values.
+    Pull the front matter block into a dict of str or list values.
 
-    Deliberately not a YAML parser: the repo has no dependencies and every post
-    uses the same flat `key: value` shape. Anything that doesn't match that
-    shape raises rather than being silently skipped, because a quietly dropped
-    field would corrupt the index and break the site.
+    Deliberately not a YAML parser -- the repo has no dependencies. It covers
+    the shapes these posts actually use: `key: value` scalars, inline
+    `[a, b]` arrays, and the block sequences Obsidian writes:
+
+        tags:
+          - slow-life
+          - rant
+
+    Anything outside that raises rather than being silently skipped, because a
+    quietly dropped field would corrupt the index and break the site.
     """
     match = FM_PATTERN.match(text)
     if not match:
         raise PostError("%s: no front matter block" % filename)
 
     fields = {}
+    pending = None  # key whose value may be an indented block sequence
+
     for lineno, line in enumerate(match.group(1).splitlines(), start=2):
         if not line.strip() or line.lstrip().startswith("#"):
             continue
+
+        stripped = line.strip()
+
+        if stripped == "-" or stripped.startswith("- "):
+            if pending is None:
+                raise PostError(
+                    "%s:%d: list item with no key above it: %r" % (filename, lineno, line)
+                )
+            fields[pending].append(unquote(stripped[1:].strip()))
+            continue
+
         if ":" not in line:
             raise PostError("%s:%d: not a `key: value` line: %r" % (filename, lineno, line))
+
         key, value = line.split(":", 1)
-        fields[key.strip()] = value.strip()
+        key, value = key.strip(), value.strip()
+
+        if value:
+            fields[key] = value
+            pending = None
+        else:
+            # Bare `key:` -- either a block sequence follows or it's empty.
+            fields[key] = []
+            pending = key
 
     return fields
 
@@ -83,8 +105,22 @@ def unquote(value):
     return value
 
 
+def scalar(fields, key, filename, required=True):
+    """Fetch a single-valued field, rejecting a block sequence."""
+    value = fields.get(key)
+    if value is None or value == []:
+        if required:
+            raise PostError("%s: missing required `%s:`" % (filename, key))
+        return None
+    if isinstance(value, list):
+        raise PostError("%s: `%s:` must be a single value, got a list" % (filename, key))
+    return unquote(value)
+
+
 def parse_tags(raw):
-    """`[a, b]` or a bare `a` -> ['a', 'b'] / ['a']. Empty stays empty."""
+    """Block sequence, inline `[a, b]`, or a bare `a` -> list of strings."""
+    if isinstance(raw, list):
+        return [t for t in (x.strip() for x in raw) if t]
     raw = raw.strip()
     if raw.startswith("[") and raw.endswith("]"):
         raw = raw[1:-1]
@@ -95,25 +131,17 @@ def git_created_at(path):
     """
     ISO timestamp of the commit that added `path`, or None.
 
-    Returns None when the adding commit is the migration commit, or when git
-    can't answer -- which is what a shallow clone looks like, so CI checks out
-    with fetch-depth: 0.
+    None also covers a shallow clone, where the adding commit isn't present --
+    which is why CI checks out with fetch-depth: 0.
     """
     try:
         out = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--follow", "--format=%H %aI", "-1", "--", path],
+            ["git", "log", "--diff-filter=A", "--follow", "--format=%aI", "-1", "--", path],
             cwd=ROOT, capture_output=True, text=True, check=True,
         ).stdout.strip()
     except (subprocess.CalledProcessError, OSError):
         return None
-
-    if not out:
-        return None
-
-    sha, _, stamp = out.partition(" ")
-    if sha == MIGRATION_COMMIT:
-        return None
-    return stamp or None
+    return out or None
 
 
 def resolve_time(fields, path, filename):
@@ -123,9 +151,9 @@ def resolve_time(fields, path, filename):
       2. the commit that added the file
       3. DEFAULT_TIME, flagged as a guess
     """
-    raw = fields.get("time")
+    raw = scalar(fields, "time", filename, required=False)
     if raw is not None:
-        value = unquote(raw).strip()
+        value = raw.strip()
         lowered = value.lower()
         if lowered in KEYWORD_TIMES:
             # Coarse on purpose: flag it so the readout shows "~" rather than
@@ -152,11 +180,8 @@ def build_entry(filename):
 
     fields = parse_front_matter(text, filename)
 
-    for required in ("title", "date"):
-        if required not in fields:
-            raise PostError("%s: missing required `%s:`" % (filename, required))
-
-    date = unquote(fields["date"])
+    title = scalar(fields, "title", filename)
+    date = scalar(fields, "date", filename)
     if not re.match(r"\A\d{4}-\d{2}-\d{2}\Z", date):
         raise PostError("%s: date must be YYYY-MM-DD, got %r" % (filename, date))
 
@@ -164,7 +189,7 @@ def build_entry(filename):
 
     entry = {
         "slug": os.path.splitext(filename)[0],
-        "title": unquote(fields["title"]),
+        "title": title,
         "date": date,
         "tags": parse_tags(fields.get("tags", "")),
         "time": time,

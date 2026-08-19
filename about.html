@@ -8,7 +8,7 @@
   <link rel="preload" href="assets/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/crt.css">
 </head>
-<body class="page fx-on">
+<body class="page">
   <div class="crt">
     <div class="crt__frame">
       <div class="crt__screen">
@@ -90,7 +90,8 @@
       });
 
       try {
-        if (localStorage.getItem('54chi.fx') === 'off') document.body.classList.remove('fx-on');
+        /* CRT is off unless the reader turned it on over on the deck. */
+        if (localStorage.getItem('54chi.fx') === 'on') document.body.classList.add('fx-on');
       } catch (e) { /* private mode */ }
     })();
   </script>
