@@ -6,7 +6,7 @@ tags:
   - slow-life
   - rant
 ---
-![[Pasted image 20260818212333.jpg]]
+![[Pasted image 20260818212333.webp]]
 
 I confess I'm an avid manga/anime consumer. It's a good escape valve, and I get to practice some Japanese. Sometimes I learn other things from them too.
 
