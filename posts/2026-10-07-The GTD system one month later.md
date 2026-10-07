@@ -1,5 +1,5 @@
 ---
-title: Year off
+title: The GTD system one month later
 date: 2026-10-07
 time: 15:43
 tags:
