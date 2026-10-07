@@ -16,7 +16,7 @@ Some issues (as far as I know):
 - Each repo requires its own vault. This can create friction if there is another "main" vault and have to switch just to write a blog post.
 - The vaults used for the blog will have issues syncing to be used across multiple devices (e.g. PC, iPhone, iPad). It is not catastrophic (can be fixed by cloning the repo again) but can be annoying.
 
-There are paid solutions around, but if multiple devices are needed, here is a simpler workaround:
+There are paid solutions around, and some free solutions like the [Enveloppe plugin](https://enveloppe.ovh/Getting%20Started/local%20folder/), but if multiple devices are needed, here is a simple workaround:
 Use the "main" obsidian vault (which is synced with other devices) to write the blog posts in it. Once ready, copy paste the contents to the github repos for the blogs in a PC that has the synced obsidian vault and push the changes.
 
 Pro: the graph view now includes the blog posts.
@@ -32,5 +32,7 @@ For me, keeping separate vaults for separate blogs, is a friction point that won
 2. Write your blog posts as notes (use a template to expedite the creation of the notes -- I use QuickAdd). You can do this from an iphone.
 3. When ready to publish, open your PC and copy paste the content to the github repo
 4. Git commit and push
+
+If at some point it gets too annoying to maintain, I'll look into automating it further, but for now, this seems to be working fine.
 
 54chi
